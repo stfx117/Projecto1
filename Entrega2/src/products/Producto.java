@@ -1,7 +1,7 @@
 package products;
 
 public abstract class Producto {
-	private int id;
+	protected int id;
 	private String nombre;
 	private double precioBase;
 	private String descripcion;
@@ -13,6 +13,36 @@ public abstract class Producto {
 		this.descripcion = descripcion;
 	}
 	
-	public abstract double calcularPrecioFinal();
+	public int getId() {
+		return this.id;
+	}
+	
+	public String getNombre() {
+		return this.nombre;
+	}
+	
+	public double getPrecioBase() {
+		return this.precioBase;
+	}
+	
+	public String getDescripcion() {
+		return this.descripcion;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	public void setPrecioBase(double precioBase) {
+		this.precioBase = precioBase;
+	}
+	
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 	
 }
