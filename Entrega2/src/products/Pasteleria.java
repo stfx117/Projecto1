@@ -18,4 +18,10 @@ public class Pasteleria extends Producto{
 		this.alergenos = alergenos;
 	}
 
+	@Override
+	public double calcularPrecioFinal() {
+		double precioFinal = getPrecioBase()*(8/100);
+		return precioFinal;
+	}
+
 }

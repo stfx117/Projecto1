@@ -25,6 +25,12 @@ public class Bebida extends Producto{
 	public void setEsCaliente(boolean esCaliente) {
 		this.esCaliente = esCaliente;
 	}
+
+	@Override
+	public double calcularPrecioFinal() {
+		double precioFinal = getPrecioBase()*(8/100);
+		return precioFinal;
+	}
 	
 	
 	
