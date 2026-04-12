@@ -2,7 +2,6 @@ package services;
 
 import users.Cliente;
 import products.JuegoDeMesa;
-import services.Mesa;
 
 public class Reserva
 {
@@ -86,7 +85,24 @@ public class Reserva
 	
 	public boolean validarRestriccionDeEdad(JuegoDeMesa juego)
 	{
-		return false;
+		if (this.menores5Anios) 
+		{
+	        if (!juego.isAptoMenores5()) 
+	        {
+	            return false; 
+	        }
+	    }
+
+	    if (this.hayJovenes) 
+	    {
+
+	        if (juego.isExclusivoAdultos()) 
+	        {
+	            return false; 
+	        }
+	    }
+	    
+	    return true; 
 	}
 	
 	public boolean capasidadMesa()
