@@ -107,7 +107,7 @@ public class Reserva
 	
 	public boolean capasidadMesa()
 	{
-		if(this.personas >= this.mesa.getCapacidadMaxima())
+		if(this.personas <= this.mesa.getCapacidadMaxima())
 		{
 			return true;
 		} else

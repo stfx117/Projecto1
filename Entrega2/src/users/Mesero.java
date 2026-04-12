@@ -2,7 +2,7 @@ package users;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import administration.Caja;
 import products.JuegoDeMesa;
 
 public class Mesero extends Empleado
@@ -17,21 +17,48 @@ public class Mesero extends Empleado
 	}
 
 	//Metodos
-	public List<JuegoDeMesa> getJUEGOSDOMINADOS() {
+	public List<JuegoDeMesa> getJUEGOSDOMINADOS() 
+	{
 		return JUEGOSDOMINADOS;
 	}
 
-	public void setJUEGOSDOMINADOS(List<JuegoDeMesa> JUEGOSDOMINADOS) {
+	public void setJUEGOSDOMINADOS(List<JuegoDeMesa> JUEGOSDOMINADOS) 
+	{
 		this.JUEGOSDOMINADOS = JUEGOSDOMINADOS;
 	}
 	
-	public double operacionesCaja(double dinero)
+	public void agregarJuegoDominado(JuegoDeMesa juego) 
 	{
-		return 1.2;
+        this.JUEGOSDOMINADOS.add(juego);
+    }
+	
+	public boolean dominaJuego(JuegoDeMesa juego) 
+	{
+        return this.JUEGOSDOMINADOS.contains(juego);
+    }
+	
+	public double operacionesCaja(Caja caja, double totalAPagar, double dineroEntregado)
+	{
+	      if (dineroEntregado < totalAPagar)
+	       {
+	    	  throw new IllegalArgumentException("Dinero insuficiente. Faltan " + (totalAPagar - dineroEntregado));
+	       }
+	        
+	       caja.recibirDinero(dineroEntregado);
+	        
+	       double cambio = dineroEntregado - totalAPagar;
+	        
+	       if (cambio > 0) 
+	       {
+	    	   caja.darDinero(cambio);
+	       }
+	        
+	       return cambio;
 	}
 	
 	@Override
-	public String toLineaTxt() {
+	public String toLineaTxt() 
+	{
 		
 		return String.format("id, nombre, email, login, password, codigoDesceunto, estaEnTurno, JUEGOSDOMINADOS",
 				id,
