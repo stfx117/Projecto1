@@ -45,4 +45,6 @@ public abstract class Producto {
 		this.descripcion = descripcion;
 	}
 	
+	public abstract double calcularPrecioFinal();
+	
 }
