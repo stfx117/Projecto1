@@ -6,7 +6,7 @@ public class Jornada {
 
     private List<Turno> turnos;
 
-    public Jornada(List<Turnos> turnos) {
+    public Jornada(List<Turno> turnos) {
         this.turnos = turnos;
     }
 

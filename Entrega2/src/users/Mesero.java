@@ -3,10 +3,12 @@ package users;
 import java.util.ArrayList;
 import java.util.List;
 
+import products.JuegoDeMesa;
+
 public class Mesero extends Empleado
 {
 	//Atributos
-	private List<String> JUEGOSDOMINADOS = new ArrayList<>();
+	private List<JuegoDeMesa> JUEGOSDOMINADOS = new ArrayList<>();
 	
 	//Cnstructor
 	public Mesero(int id, String nombre, String email, String login, String password, String codigoDesceunto, boolean estaEnTurno)
@@ -15,12 +17,12 @@ public class Mesero extends Empleado
 	}
 
 	//Metodos
-	public List<String> getJUEGOSDOMINADOS() {
+	public List<JuegoDeMesa> getJUEGOSDOMINADOS() {
 		return JUEGOSDOMINADOS;
 	}
 
-	public void setJUEGOSDOMINADOS(List<String> jUEGOSDOMINADOS) {
-		JUEGOSDOMINADOS = jUEGOSDOMINADOS;
+	public void setJUEGOSDOMINADOS(List<JuegoDeMesa> JUEGOSDOMINADOS) {
+		this.JUEGOSDOMINADOS = JUEGOSDOMINADOS;
 	}
 	
 	public double operacionesCaja(double dinero)

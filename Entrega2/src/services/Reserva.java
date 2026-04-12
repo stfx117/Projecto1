@@ -1,6 +1,7 @@
 package services;
 
 import users.Cliente;
+import products.JuegoDeMesa;
 import services.Mesa;
 
 public class Reserva
@@ -8,22 +9,22 @@ public class Reserva
 	//Atributos
 	private int id;
 	private Cliente cliente;
-	private String mesa;
+	private Mesa mesa;
 	private int personas;
 	private boolean menores5Anios;
 	private boolean hayJovenes;
 	private String estadia;
 	
 	//Constructor
-	public Reserva(int id, Cliente cliente, String mesa, int personas, boolean menores5Anios, boolean hayJovenes, String estadia)
+	public Reserva(int id, Cliente cliente, Mesa mesa, int personas, boolean menores5Anios, boolean hayJovenes, String estadia)
 	{
-		this.setId(id);
-		this.setCliente(cliente);
-		this.setMesa(mesa);
-		this.setPersonas(personas);
-		this.setMenores5Anios(menores5Anios);
-		this.setHayJovenes(hayJovenes);
-		this.setEstadia(estadia);
+		this.id = id;
+		this.cliente = cliente;
+		this.mesa = mesa;
+		this.personas = personas;
+		this.menores5Anios = menores5Anios;
+		this.hayJovenes = hayJovenes;
+		this.estadia = estadia;
 	}
 
 	//Metodos
@@ -43,11 +44,11 @@ public class Reserva
 		this.cliente = cliente;
 	}
 
-	public String getMesa() {
+	public Mesa getMesa() {
 		return mesa;
 	}
 
-	public void setMesa(String mesa) {
+	public void setMesa(Mesa mesa) {
 		this.mesa = mesa;
 	}
 
@@ -90,7 +91,7 @@ public class Reserva
 	
 	public boolean capasidadMesa()
 	{
-		if(this.personas >= this.mesa.getCapasidadMaxima())
+		if(this.personas >= this.mesa.getCapacidadMaxima())
 		{
 			return true;
 		} else

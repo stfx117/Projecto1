@@ -34,7 +34,7 @@ public class Prestamo{
 	}
 	
 	public boolean verificarMaestriaMesero(Mesero mesero) {
-		List<JuegoDeMesa> listaJuegos = mesero.getJuegosDominados();
+		List<JuegoDeMesa> listaJuegos = mesero.getJUEGOSDOMINADOS();
 		for (int i = 0; i < listaJuegos.size(); i++) {
 			JuegoDeMesa juegoMesero = listaJuegos.get(i);
 			for (int j = 0; i < this.juegos.size(); j++) {

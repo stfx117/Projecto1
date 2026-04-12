@@ -1,5 +1,11 @@
 package users;
 
+import administration.Historial;
+import administration.Sugerencia;
+import products.Producto;
+import sales.Venta;
+import services.Prestamo;
+
 public class Administrador extends Usuario
 {
 	//Constructor
@@ -9,14 +15,14 @@ public class Administrador extends Usuario
 	}
 	
 	//Metodos
-	public Venta buscarVenta(int id)
+	public Venta buscarVenta(Historial ventas, int id)
 	{
-	
+		return ventas.getVenta(id);
 	}
 	
-	public Prestamo buscarPrestamo(int id)
+	public Prestamo buscarPrestamo(Historial prestamos, int id)
 	{
-		
+		return prestamos.getPrestamo(id);
 	}
 	
 	public void moverjuego(int id)
