@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class BoardGameCafe
 {
-	//Atributos
+	//Atributoss
 	private String nombre;
 	private Map<String, String> configuracion = new HashMap<>();
 	private  static BoardGameCafe instancia;
