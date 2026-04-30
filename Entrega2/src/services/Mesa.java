@@ -6,9 +6,9 @@ public class Mesa{
 	private boolean estaOcupada;
 	
 	public Mesa(int id, int capacidadMaxima, boolean estaOcupada) {
-		this.setId(id);
-		this.setCapacidadMaxima(capacidadMaxima);
-		this.setEstaOcupada(estaOcupada);
+		this.id = id;
+		this.capacidadMaxima = capacidadMaxima;
+		this.estaOcupada = estaOcupada;
 	}
 
 	public int getId() {
@@ -27,7 +27,7 @@ public class Mesa{
 		this.capacidadMaxima = capacidadMaxima;
 	}
 
-	public boolean isEstaOcupada() {
+	public boolean getEstaOcupada() {
 		return estaOcupada;
 	}
 

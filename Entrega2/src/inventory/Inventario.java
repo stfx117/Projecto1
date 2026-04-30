@@ -1,20 +1,20 @@
 package inventory;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import products.JuegoDeMesa;
-import products.Producto;
+import products.ProductoIngerible;
 
 public class Inventario {
 
-    private List<JuegoDeMesa> juegosVenta;
-    private List<JuegoDeMesa> juegosPrestamo;
-    private List<Producto> productosIngeribles;
+    private ArrayList<JuegoDeMesa> juegosVenta;
+    private ArrayList<JuegoDeMesa> juegosPrestamo;
+    private ArrayList<ProductoIngerible> productosIngeribles;
 
-    public Inventario(List<JuegoDeMesa> juegosVenta, List<JuegoDeMesa> juegosPrestamo, List<Producto> productosIngeribles) {
-        this.juegosVenta = juegosVenta;
-        this.juegosPrestamo = juegosPrestamo;
-        this.productosIngeribles = productosIngeribles;
+    public Inventario() {
+        this.juegosVenta = new ArrayList<JuegoDeMesa>();
+        this.juegosPrestamo = new ArrayList<JuegoDeMesa>();
+        this.productosIngeribles = new ArrayList<ProductoIngerible>();
     }
 
     public void agregarJuegoVenta(JuegoDeMesa j) {
@@ -25,7 +25,7 @@ public class Inventario {
         juegosPrestamo.add(j);
     }
 
-    public void agregarProductoIngerible(Producto p) {
+    public void agregarProductoIngerible(ProductoIngerible p) {
         productosIngeribles.add(p);
     }
 
@@ -37,20 +37,32 @@ public class Inventario {
         juegosPrestamo.remove(j);
     }
     
-    public void eliminarProductoIngerible(Producto p) {
+    public void eliminarProductoIngerible(ProductoIngerible p) {
         productosIngeribles.remove(p);
     }
 
-    public List<JuegoDeMesa> getJuegosVenta() {
-        return juegosVenta;
+    public JuegoDeMesa getJuegosVenta(int index) {
+        return juegosVenta.get(index);
     }
 
-    public List<JuegoDeMesa> getJuegosPrestamo() {
-        return juegosPrestamo;
+    public JuegoDeMesa getJuegosPrestamo(int index) {
+        return juegosPrestamo.get(index);
     }
 
-    public List<Producto> getProductosIngeribles() {
-        return productosIngeribles;
+    public ProductoIngerible getProductosIngeribles(int index) {
+        return productosIngeribles.get(index);
+    }
+    
+    public void vaciarJuegosVenta() {
+    	juegosVenta.clear();
+    }
+    
+    public void vaciarJuegosPrestamo() {
+    	juegosPrestamo.clear();
+    }
+    
+    public void vaciarProductosIngeribles() {
+    	productosIngeribles.clear();
     }
 
 }

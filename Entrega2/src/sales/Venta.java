@@ -1,22 +1,22 @@
 package sales;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import products.Producto;
 
 public class Venta{
 	private int id;
 	private String fecha;
-	private List<Producto> items;
+	private ArrayList<Producto> items;
 	private boolean propina;
 	private double subtotal;
 	private double total;
 	
-	public Venta(int id, String fecha, List<Producto> items, boolean propina) {
+	public Venta(int id, String fecha, boolean propina) {
 		this.id = id;
 		this.fecha = fecha;
-		this.items = items;
-		this.setPropina(propina);
+		this.items = new ArrayList<Producto>();
+		this.propina = propina;
 		this.subtotal = 0;
 		this.total = 0;
 	}
@@ -37,12 +37,8 @@ public class Venta{
 		this.fecha = fecha;
 	}
 
-	public List<Producto> getItems() {
-		return items;
-	}
-
-	public void setItems(List<Producto> items) {
-		this.items = items;
+	public Producto getItems(int index) {
+		return this.items.get(index);
 	}
 
 	public double getSubtotal() {
