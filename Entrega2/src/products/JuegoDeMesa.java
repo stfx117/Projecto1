@@ -9,7 +9,7 @@ public class JuegoDeMesa extends Producto {
 	private restriccionEdad restricciones;
 	private boolean esDificil;
 	public enum EstadoFisico {DESAPARECIDO, DAÑADO, OPTIMO, NUEVO};
-	public enum Categoria {CARTAS, TABLERO, ACCION}
+	public enum Categoria {CARTAS, TABLERO, ACCION};
 	private boolean paraVenta;
 	private EstadoFisico estadoFisico;
 	private Categoria categoria;

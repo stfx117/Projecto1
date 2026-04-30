@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import products.JuegoDeMesa;
@@ -8,14 +9,14 @@ import users.Mesero;
 
 public class Prestamo{
 	private int id;
-	private List<JuegoDeMesa> juegos;
+	private ArrayList<JuegoDeMesa> juegos;
 	private Mesa mesaAsociada;
 	private boolean advertenciaSinMesero;
 	private Cliente clienteAsociado;
 	
-	public Prestamo(int id, List<JuegoDeMesa> juegos, Mesa mesaAsociada, boolean advertenciaSinMesero, Cliente clienteAsociado) {
+	public Prestamo(int id, Mesa mesaAsociada, boolean advertenciaSinMesero, Cliente clienteAsociado) {
 		this.id = id;
-		this.juegos = juegos;
+		this.juegos = new ArrayList<JuegoDeMesa>();
 		this.mesaAsociada = mesaAsociada;
 		this.advertenciaSinMesero = advertenciaSinMesero;
 		this.clienteAsociado = clienteAsociado;
@@ -57,8 +58,8 @@ public class Prestamo{
 		this.id = id;
 	}
 	
-	public List<JuegoDeMesa> getJuegos() {
-		return this.juegos;
+	public JuegoDeMesa getJuegos(int id) {
+		return this.juegos.get(id);
 	}
 	
 	public Mesa getMesa() {
