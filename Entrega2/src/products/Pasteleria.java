@@ -1,21 +1,25 @@
 package products;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class Pasteleria extends Producto{
-	private List<String> alergenos;
+public class Pasteleria extends ProductoIngerible{
+	private ArrayList<String> alergenos;
 	
-	public Pasteleria(int id, String nombre, double precioBase, String descripcion, List<String> alergenos){
+	public Pasteleria(int id, String nombre, double precioBase, String descripcion){
 		super(id, nombre, precioBase, descripcion);
-		this.alergenos = alergenos;
+		this.alergenos = new ArrayList<String>();
 	}
 
-	public List<String> getAlergenos() {
-		return alergenos;
+	public String getAlergenos(int index) {
+		return alergenos.get(index);
 	}
 
-	public void setAlergenos(List<String> alergenos) {
-		this.alergenos = alergenos;
+	public void eliminarAlergenos(int index) {
+		this.alergenos.remove(index);
+	}
+	
+	public void clearAlergenos() {
+		alergenos.clear();
 	}
 
 	@Override

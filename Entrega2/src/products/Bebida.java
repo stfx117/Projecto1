@@ -1,6 +1,6 @@
 package products;
 
-public class Bebida extends Producto{
+public class Bebida extends ProductoIngerible{
 	private boolean esAlcoholica;
 	private boolean esCaliente;
 	
