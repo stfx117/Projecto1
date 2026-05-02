@@ -38,7 +38,7 @@ public class Prestamo{
 		List<JuegoDeMesa> listaJuegos = mesero.getJUEGOSDOMINADOS();
 		for (int i = 0; i < listaJuegos.size(); i++) {
 			JuegoDeMesa juegoMesero = listaJuegos.get(i);
-			for (int j = 0; i < this.juegos.size(); j++) {
+			for (int j = 0; j < this.juegos.size(); j++) {
 				JuegoDeMesa juegoPrestamo = this.juegos.get(j);
 				if (juegoMesero.getId() == juegoPrestamo.getId()) {
 					return true;
@@ -59,7 +59,16 @@ public class Prestamo{
 	}
 	
 	public JuegoDeMesa getJuegos(int id) {
-		return this.juegos.get(id);
+		if (juegos.size() > 0){
+			if (juegos.size() > id) {
+				return this.juegos.get(id);
+				
+				
+		}
+			return null;
+		}
+		return null;
+		
 	}
 	
 	public Mesa getMesa() {
