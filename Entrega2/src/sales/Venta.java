@@ -10,7 +10,6 @@ public class Venta{
 	private ArrayList<Producto> items;
 	private boolean propina;
 	private double subtotal;
-	private double total;
 	
 	public Venta(int id, String fecha, boolean propina) {
 		this.id = id;
@@ -18,7 +17,6 @@ public class Venta{
 		this.items = new ArrayList<Producto>();
 		this.propina = propina;
 		this.subtotal = 0;
-		this.total = 0;
 	}
 
 	public int getId() {
@@ -38,7 +36,13 @@ public class Venta{
 	}
 
 	public Producto getItems(int index) {
-		return this.items.get(index);
+		if (items.size() > 0){
+			if (items.size() > index) {
+				return this.items.get(index);
+			}
+			return null;
+		}
+		return null;
 	}
 
 	public double getSubtotal() {
@@ -49,14 +53,6 @@ public class Venta{
 		this.subtotal = subtotal;
 	}
 
-	public double getTotal() {
-		return total;
-	}
-
-	public void setTotal(double total) {
-		this.total = total;
-	}
-	
 	public boolean getPropina() {
 		return propina;
 	}
@@ -80,16 +76,18 @@ public class Venta{
 			Producto auxProducto = items.get(i);
 			double auxPrecioFinal = auxProducto.calcularPrecioFinal();
 			this.subtotal = this.subtotal + auxPrecioFinal;
+			auxProducto = null;
+			
 		}
 	}
 	
 	public void aplicarPropina() {
-		this.total = this.subtotal + (this.subtotal * 0.1);
+		this.subtotal = this.subtotal + (this.subtotal * 0.1);
 		setPropina(true);
 	}
 	
 	public void aplicarPropina(double propina) {
-		this.total = this.subtotal + this.subtotal * propina;
+		this.subtotal = this.subtotal + this.subtotal * propina;
 		setPropina(true);
 	}
 }

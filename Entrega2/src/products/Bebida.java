@@ -28,7 +28,7 @@ public class Bebida extends ProductoIngerible{
 
 	@Override
 	public double calcularPrecioFinal() {
-		double precioFinal = getPrecioBase()*(8/100);
+		double precioFinal = (getPrecioBase()*0.08) + getPrecioBase();
 		return precioFinal;
 	}
 	
