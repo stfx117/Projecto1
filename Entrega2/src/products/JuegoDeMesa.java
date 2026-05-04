@@ -117,4 +117,10 @@ public class JuegoDeMesa extends Producto {
 		return this.restricciones == restriccionEdad.ADULTOS;
 	}
 
+	@Override
+	public String toLineaTxt() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

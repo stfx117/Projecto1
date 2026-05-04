@@ -41,12 +41,12 @@ public class Inventario {
         productosIngeribles.remove(p);
     }
 
-    public JuegoDeMesa getJuegosVenta(int index) {
-        return juegosVenta.get(index);
+    public ArrayList<JuegoDeMesa> getJuegosVenta() {
+        return this.juegosVenta;
     }
 
-    public JuegoDeMesa getJuegosPrestamo(int index) {
-        return juegosPrestamo.get(index);
+    public ArrayList<JuegoDeMesa> getJuegosPrestamo() {
+        return this.juegosPrestamo;
     }
 
     public ProductoIngerible getProductosIngeribles(int index) {

@@ -1,9 +1,10 @@
 package services;
 
 import users.Cliente;
+import interfas.GuardadoTxt;
 import products.JuegoDeMesa;
 
-public class Reserva
+public class Reserva implements GuardadoTxt
 {
 	//Atributos
 	private int id;
@@ -114,6 +115,12 @@ public class Reserva
 		{
 			return false;
 		}
+	}
+
+	@Override
+	public String toLineaTxt() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

@@ -3,11 +3,12 @@ package services;
 import java.util.ArrayList;
 import java.util.List;
 
+import interfas.GuardadoTxt;
 import products.JuegoDeMesa;
 import users.Cliente;
 import users.Mesero;
 
-public class Prestamo{
+public class Prestamo implements GuardadoTxt{
 	private int id;
 	private ArrayList<JuegoDeMesa> juegos;
 	private Mesa mesaAsociada;
@@ -84,5 +85,13 @@ public class Prestamo{
 	
 	public void setClienteAsociado(Cliente cliente) {
 		this.clienteAsociado = cliente;
+	}
+
+	@Override
+	public String toLineaTxt() {
+		StringBuilder prestamo = new StringBuilder();
+		
+		
+		return prestamo.toString();
 	}
 }

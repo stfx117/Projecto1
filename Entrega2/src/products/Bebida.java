@@ -31,6 +31,12 @@ public class Bebida extends ProductoIngerible{
 		double precioFinal = getPrecioBase()*(8/100);
 		return precioFinal;
 	}
+
+	@Override
+	public String toLineaTxt() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	

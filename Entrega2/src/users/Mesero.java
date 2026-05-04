@@ -2,7 +2,6 @@ package users;
 
 import java.util.ArrayList;
 import java.util.List;
-import administration.Caja;
 import products.JuegoDeMesa;
 
 public class Mesero extends Empleado
@@ -36,25 +35,6 @@ public class Mesero extends Empleado
 	{
         return this.JUEGOSDOMINADOS.contains(juego);
     }
-	
-	public double operacionesCaja(Caja caja, double totalAPagar, double dineroEntregado)
-	{
-	      if (dineroEntregado < totalAPagar)
-	       {
-	    	  throw new IllegalArgumentException("Dinero insuficiente. Faltan " + (totalAPagar - dineroEntregado));
-	       }
-	        
-	       caja.recibirDinero(dineroEntregado);
-	        
-	       double cambio = dineroEntregado - totalAPagar;
-	        
-	       if (cambio > 0) 
-	       {
-	    	   caja.darDinero(cambio);
-	       }
-	        
-	       return cambio;
-	}
 	
 	@Override
 	public String toLineaTxt() 

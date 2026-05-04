@@ -1,10 +1,12 @@
 package sales;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import interfas.GuardadoTxt;
 import products.Producto;
 
-public class Venta{
+public class Venta implements GuardadoTxt{
 	private int id;
 	private String fecha;
 	private ArrayList<Producto> items;
@@ -91,5 +93,33 @@ public class Venta{
 	public void aplicarPropina(double propina) {
 		this.total = this.subtotal + this.subtotal * propina;
 		setPropina(true);
+	}
+
+	@Override
+	public String toLineaTxt() {
+		StringBuilder venta = new StringBuilder();
+		
+		venta.append(this.id).append(",");
+		venta.append(this.fecha).append(",");
+		venta.append(this.propina).append(",");
+		venta.append(this.subtotal).append(",");
+		venta.append(this.subtotal).append(",");
+		
+		if(this.items != null && !this.items.isEmpty())
+		{
+			List<String> idProductos = new ArrayList<>();
+			
+			for(Producto p: this.items)
+			{
+				idProductos.add(String.valueOf(p.getId()));
+			}
+			
+			venta.append(String.join("-", idProductos));
+		} else
+		{
+			venta.append("sin Prodcutos");
+		}
+		
+		return venta.toString();
 	}
 }

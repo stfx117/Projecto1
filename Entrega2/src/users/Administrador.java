@@ -6,7 +6,7 @@ import administration.Historial;
 import administration.Sugerencia;
 import inventory.Inventario;
 import products.JuegoDeMesa;
-import products.Producto;
+import products.ProductoIngerible;
 import products.JuegoDeMesa.Categoria;
 import products.JuegoDeMesa.EstadoFisico;
 import products.JuegoDeMesa.restriccionEdad;
@@ -89,7 +89,7 @@ public class Administrador extends Usuario
 		}
 	}
 	
-	public void agregarProducto(Inventario inventario, Producto nuevoProducto)
+	public void agregarProducto(Inventario inventario, ProductoIngerible nuevoProducto)
 	{
 		inventario.agregarProductoIngerible(nuevoProducto);
 	}

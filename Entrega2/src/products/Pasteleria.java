@@ -28,4 +28,10 @@ public class Pasteleria extends ProductoIngerible{
 		return precioFinal;
 	}
 
+	@Override
+	public String toLineaTxt() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
