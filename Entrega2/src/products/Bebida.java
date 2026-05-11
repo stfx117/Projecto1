@@ -34,11 +34,12 @@ public class Bebida extends ProductoIngerible{
 
 	@Override
 	public String toLineaTxt() {
-		// TODO Auto-generated method stub
-		return null;
+		return String.format("id, nombre, precioBase, descripcion, esAlcoholica, esCaliente",
+				this.id,
+				this.nombre,
+				this.precioBase,
+				this.descripcion,
+				String.valueOf(this.esAlcoholica),
+				String.valueOf(this.esCaliente));
 	}
-	
-	
-	
-	
 }

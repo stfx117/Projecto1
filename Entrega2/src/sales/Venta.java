@@ -122,4 +122,11 @@ public class Venta implements GuardadoTxt{
 		
 		return venta.toString();
 	}
+	
+	public ArrayList<Producto> getItems() {
+	    if (this.items == null) {
+	        return new ArrayList<>();
+	    }
+	    return this.items;
+	}
 }

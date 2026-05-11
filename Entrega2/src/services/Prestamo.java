@@ -91,6 +91,25 @@ public class Prestamo implements GuardadoTxt{
 	public String toLineaTxt() {
 		StringBuilder prestamo = new StringBuilder();
 		
+		prestamo.append(this.id).append(",");
+		prestamo.append(this.mesaAsociada.getId()).append("-Mesa,");
+		prestamo.append(this.advertenciaSinMesero).append(",");
+		prestamo.append(this.clienteAsociado.getNombre()).append(",");
+		
+		if(this.juegos != null && !this.juegos.isEmpty())
+		{
+			List<String> idJuegos = new ArrayList<>();
+			
+			for(JuegoDeMesa j : this.juegos)
+			{
+				idJuegos.add(String.valueOf(j.getId()));
+			}
+			prestamo.append(String.join("-", idJuegos));
+			
+		} else
+		{
+			prestamo.append("Sin juegos");
+		}
 		
 		return prestamo.toString();
 	}
