@@ -3,11 +3,15 @@ package users;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import interfas.GuardadoTxt;
 
 public abstract class Usuario implements GuardadoTxt
 {
 	//Atributos
+	protected String rol;
 	protected int id;
 	protected String nombre;
 	protected String email;
@@ -15,8 +19,9 @@ public abstract class Usuario implements GuardadoTxt
 	protected String password;
 	
 	//Constructor
-	public Usuario(int id, String nombre, String email, String login, String password)
+	public Usuario(String rol, int id, String nombre, String email, String login, String password)
 	{
+		this.rol = rol;
 		this.id = id;
 		this.nombre = nombre;
 		this.email = email;

@@ -17,7 +17,7 @@ public class PrestamoTest {
 	@Test
 	public void testCrearPrestamo() {
 
-	    Cliente cliente = new Cliente(1, "Andres", "asdhjk@asd.com", "sadhjlkas", "hdsajkad", "01/01/2000", 0, "231asd");
+	    Cliente cliente = new Cliente("CLIENTE" ,1, "Andres", "asdhjk@asd.com", "sadhjlkas", "hdsajkad", "01/01/2000", 0, "231asd");
 	    Mesa mesa = new Mesa(1, 4, false);
 
 	    Prestamo p = new Prestamo(1, mesa, false, cliente);
@@ -30,7 +30,7 @@ public class PrestamoTest {
 	@Test
 	public void testAñadirJuego() {
 		Mesa mesa = new Mesa(1, 4, false);
-		Cliente cliente = new Cliente(1, "Andres", "asdhjk@asd.com", "sadhjlkas", "hdsajkad", "01/01/2000", 0, "231asd");
+		Cliente cliente = new Cliente("CLIENTE",1, "Andres", "asdhjk@asd.com", "sadhjlkas", "hdsajkad", "01/01/2000", 0, "231asd");
 		Prestamo p = new Prestamo(1, mesa, false, cliente);
 		JuegoDeMesa j = new JuegoDeMesa(1, "Uno", 1.22, "juego muy lindo", 1099, "hasbro", 1, 8, restriccionEdad.ADULTOS, false, EstadoFisico.OPTIMO, Categoria.CARTAS, false);
 		p.agregarJuego(j);
@@ -40,7 +40,7 @@ public class PrestamoTest {
 	@Test
 	public void testLimpiarListaJuegos() {
 		Mesa mesa = new Mesa(1, 4, false);
-		Cliente cliente = new Cliente(1, "Andres", "asdhjk@asd.com", "sadhjlkas", "hdsajkad", "01/01/2000", 0, "231asd");
+		Cliente cliente = new Cliente("CLIENTE", 1, "Andres", "asdhjk@asd.com", "sadhjlkas", "hdsajkad", "01/01/2000", 0, "231asd");
 		Prestamo p = new Prestamo(1, mesa, false, cliente);
 		JuegoDeMesa j1 = new JuegoDeMesa(1, "Uno", 1.22, "juego muy lindo", 1099, "hasbro", 1, 8, restriccionEdad.ADULTOS, false, EstadoFisico.OPTIMO, Categoria.CARTAS, false);
 		JuegoDeMesa j2 = new JuegoDeMesa(2, "Exploding Kittens", 1.22, "juego muy lindo", 1099, "hasbro", 1, 8, restriccionEdad.ADULTOS, false, EstadoFisico.OPTIMO, Categoria.CARTAS, false);
@@ -54,7 +54,7 @@ public class PrestamoTest {
 	@Test
 	public void testEliminarJuego() {
 		Mesa mesa = new Mesa(1, 4, false);
-		Cliente cliente = new Cliente(1, "Andres", "asdhjk@asd.com", "sadhjlkas", "hdsajkad", "01/01/2000", 0, "231asd");
+		Cliente cliente = new Cliente("CLIENTE", 1, "Andres", "asdhjk@asd.com", "sadhjlkas", "hdsajkad", "01/01/2000", 0, "231asd");
 		Prestamo p = new Prestamo(1, mesa, false, cliente);
 		JuegoDeMesa j1 = new JuegoDeMesa(1, "Uno", 1.22, "juego muy lindo", 1099, "hasbro", 1, 8, restriccionEdad.ADULTOS, false, EstadoFisico.OPTIMO, Categoria.CARTAS, false);
 		JuegoDeMesa j2 = new JuegoDeMesa(2, "Exploding Kittens", 1.22, "juego muy lindo", 1099, "hasbro", 1, 8, restriccionEdad.ADULTOS, false, EstadoFisico.OPTIMO, Categoria.CARTAS, false);
@@ -68,11 +68,11 @@ public class PrestamoTest {
 	@Test
 	public void testMaestriaMesero() {
 		Mesa mesa = new Mesa(1, 4, false);
-		Cliente cliente = new Cliente(1, "Andres", "asdhjk@asd.com", "sadhjlkas", "hdsajkad", "01/01/2000", 0, "231asd");
+		Cliente cliente = new Cliente("CLIENTE", 1, "Andres", "asdhjk@asd.com", "sadhjlkas", "hdsajkad", "01/01/2000", 0, "231asd");
 		Prestamo p = new Prestamo(1, mesa, false, cliente);
 		JuegoDeMesa j1 = new JuegoDeMesa(1, "Uno", 1.22, "juego muy lindo", 1099, "hasbro", 1, 8, restriccionEdad.ADULTOS, false, EstadoFisico.OPTIMO, Categoria.CARTAS, false);
 		JuegoDeMesa j2 = new JuegoDeMesa(2, "Exploding Kittens", 1.22, "juego muy lindo", 1099, "hasbro", 1, 8, restriccionEdad.ADULTOS, false, EstadoFisico.OPTIMO, Categoria.CARTAS, false);
-		Mesero m = new Mesero(1, "Pepinoto", "peroi@jaslkd.com", "asdjlksd", "kasjd", "231asdasd", true);
+		Mesero m = new Mesero("", 1, "Pepinoto", "peroi@jaslkd.com", "asdjlksd", "kasjd", "231asdasd", true);
 		m.agregarJuegoDominado(j2);
 		p.agregarJuego(j1);
 		p.agregarJuego(j2);

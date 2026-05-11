@@ -13,7 +13,7 @@ public class HistorialTest {
 	@Test
 	public void testCrearHistorial() {
 		Mesa mesa = new Mesa(1, 4, false);
-		Cliente cliente = new Cliente(1, "Andres", "asdhjk@asd.com", "sadhjlkas", "hdsajkad", "01/01/2000", 0, "231asd");
+		Cliente cliente = new Cliente("CLIENTE", 1, "Andres", "asdhjk@asd.com", "sadhjlkas", "hdsajkad", "01/01/2000", 0, "231asd");
 		Venta v = new Venta(1, "01/01/2330", false);
 		Prestamo p = new Prestamo(1, mesa, false, cliente);
 		Historial h = new Historial();

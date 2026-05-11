@@ -24,8 +24,8 @@ public class JornadaTest {
 	@Test
 	public void testCrearJornada() {
 		Jornada j = new Jornada();
-		Mesero m1 = new Mesero(1, "Pepinoto", "peroi@jaslkd.com", "asdjlksd", "kasjd", "231asdasd", true);
-		Mesero m2 = new Mesero(2, "Pepino", "peasdoi@jaslkd.com", "asddsalksd", "kafsdjd", "231afssd", true);
+		Mesero m1 = new Mesero("MESERO" ,1, "Pepinoto", "peroi@jaslkd.com", "asdjlksd", "kasjd", "231asdasd", true);
+		Mesero m2 = new Mesero("MESERO" ,2, "Pepino", "peasdoi@jaslkd.com", "asddsalksd", "kafsdjd", "231afssd", true);
 		Turno t1 = new Turno(m1);
 		Turno t2 = new Turno(m2);
 		j.agregarTurno(DiaSemana.LUNES, t1);

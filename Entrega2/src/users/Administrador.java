@@ -24,9 +24,9 @@ public class Administrador extends Usuario
 	private List<Sugerencia> buzonSugerencias = new ArrayList<>();
 	
 	//Constructor
-	public Administrador(int id, String nombre, String email, String login, String password)
+	public Administrador(String rol, int id, String nombre, String email, String login, String password)
 	{
-		super(id, nombre, email, login, password);
+		super(rol, id, nombre, email, login, password);
 	}
 	
 	//Metodos
@@ -102,7 +102,8 @@ public class Administrador extends Usuario
 	@Override
 	public String toLineaTxt()
 	{
-		return String.format("id, nombre, email, login, passweord",
+		return String.format("rol, id, nombre, email, login, passweord",
+				rol,
 				id,
 				nombre,
 				email,

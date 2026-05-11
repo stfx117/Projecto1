@@ -10,9 +10,9 @@ public class Mesero extends Empleado
 	private List<JuegoDeMesa> JUEGOSDOMINADOS = new ArrayList<>();
 	
 	//Cnstructor
-	public Mesero(int id, String nombre, String email, String login, String password, String codigoDesceunto, boolean estaEnTurno)
+	public Mesero(String rol, int id, String nombre, String email, String login, String password, String codigoDesceunto, boolean estaEnTurno)
 	{
-		super(id, nombre, email, login, password, codigoDesceunto, estaEnTurno);
+		super(rol, id, nombre, email, login, password, codigoDesceunto, estaEnTurno);
 	}
 
 	//Metodos
@@ -40,7 +40,8 @@ public class Mesero extends Empleado
 	public String toLineaTxt() 
 	{
 		
-		return String.format("id, nombre, email, login, password, codigoDesceunto, estaEnTurno, JUEGOSDOMINADOS",
+		return String.format("rol, id, nombre, email, login, password, codigoDesceunto, estaEnTurno, JUEGOSDOMINADOS",
+				rol,
 				id,
 				nombre,
 				email,
