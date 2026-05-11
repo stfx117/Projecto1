@@ -1,11 +1,16 @@
 package main;
 
+import java.util.Scanner;
 
+import administration.Historial;
+import inventory.Inventario;
+import products.JuegoDeMesa;
+import products.Producto;
+import products.ProductoIngerible;
+import sales.Venta;
+import services.Prestamo;
 
-
-
-
-
+public class Main{
 
 public void menuVenta(Venta venta) {
     boolean salir = false;
@@ -19,7 +24,7 @@ public void menuVenta(Venta venta) {
         System.out.println("6. Ver subtotal");
         System.out.println("0. Salir");
         
-        int opcion = scanner.nextInt();
+        int opcion = Scanner.nextInt();
         switch (opcion) {
             case 1:
                 agregarProductoVenta(venta);
@@ -58,14 +63,14 @@ public void menuVenta(Venta venta) {
 
 public void agregarProductoVenta(Venta venta) {
     System.out.println("Ingrese id del producto:");
-    int id = scanner.nextInt();
+    int id = Scanner.nextInt();
     venta.agregarProducto(producto);
     System.out.println("Producto agregado.");
 }
 
 public void eliminarProductoVenta(Venta venta) {
     System.out.println("Ingrese posición del producto a eliminar:");
-    int index = scanner.nextInt();
+    int index = Scanner.nextInt();
     venta.eliminarProducto(index);
     System.out.println("Producto eliminado.");
 }
@@ -85,10 +90,10 @@ public void mostrarProductosVenta(Venta venta) {
 
 public void aplicarPropinaVenta(Venta venta) {
     System.out.println("¿Propina personalizada? (1 = sí / 0 = no)");
-    int opcion = scanner.nextInt();
+    int opcion = Scanner.nextInt();
     if (opcion == 1) {
         System.out.println("Ingrese porcentaje (ej: 0.15):");
-        double porcentaje = scanner.nextDouble();
+        double porcentaje = Scanner.nextDouble();
         venta.aplicarPropina(porcentaje);
     } else {
         venta.aplicarPropina();
@@ -110,7 +115,7 @@ public void menuHistorial(Historial historial) {
         System.out.println("6. Eliminar préstamo");
         System.out.println("0. Salir");
 
-        int opcion = scanner.nextInt();
+        int opcion = Scanner.nextInt();
         switch (opcion) {
             case 1:
                 agregarVentaHistorial(historial);
@@ -148,9 +153,9 @@ public void menuHistorial(Historial historial) {
 
 public void agregarVentaHistorial(Historial historial) {
     System.out.println("Ingrese ID de la venta: ");
-    int id = scanner.nextInt();
+    int id = Scanner.nextInt();
     System.out.println("Ingrese una fecha en formato YY-MM-DD: ");
-    String fecha = scanner.nextString();
+    String fecha = Scanner.toString();
     Venta venta = new Venta(id, fecha, false);
     historial.agregarVenta(venta);
     System.out.println("Venta agregada al historial.");
@@ -158,7 +163,7 @@ public void agregarVentaHistorial(Historial historial) {
 
 public void agregarPrestamoHistorial(Historial historial) {
     System.out.println("Ingrese ID del préstamo:");
-    int id = scanner.nextInt();
+    int id = Scanner.nextInt();
     Prestamo prestamo = new Prestamo(id, null, false, null);
     historial.agregarPrestamo(prestamo);
     System.out.println("Préstamo agregado al historial.");
@@ -166,7 +171,7 @@ public void agregarPrestamoHistorial(Historial historial) {
 
 public void buscarVenta(Historial historial) {
     System.out.println("Ingrese ID de la venta:");
-    int id = scanner.nextInt();
+    int id = Scanner.nextInt();
     Venta venta = historial.getVenta(id);
     if (venta != null) {
         System.out.println("Venta encontrada con ID: " + venta.getId());
@@ -178,7 +183,7 @@ public void buscarVenta(Historial historial) {
 
 public void buscarPrestamo(Historial historial) {
     System.out.println("Ingrese ID del préstamo:");
-    int id = scanner.nextInt();
+    int id = Scanner.nextInt();
     Prestamo prestamo = historial.getPrestamo(id);
     if (prestamo != null) {
         System.out.println("Préstamo encontrado con ID: " + prestamo.getId());
@@ -189,7 +194,7 @@ public void buscarPrestamo(Historial historial) {
 
 public void eliminarVenta(Historial historial) {
     System.out.println("Ingrese ID de la venta a eliminar:");
-    int id = scanner.nextInt();
+    int id = Scanner.nextInt();
     if (historial.comprobarVenta(id)) {
         historial.eliminarVenta(id);
         System.out.println("Venta eliminada.");
@@ -200,7 +205,7 @@ public void eliminarVenta(Historial historial) {
 
 public void eliminarPrestamo(Historial historial) {
     System.out.println("Ingrese ID del préstamo a eliminar:");
-    int id = scanner.nextInt();
+    int id = Scanner.nextInt();
     if (historial.comprobarPrestamo(id)) {
         historial.eliminarPrestamo(id);
         System.out.println("Préstamo eliminado.");
@@ -221,7 +226,7 @@ public void menuInventario(Inventario inventario) {
         System.out.println("3. Productos ingeribles");
         System.out.println("0. Salir");
 
-        int opcion = scanner.nextInt();
+        int opcion = Scanner.nextInt();
         switch (opcion) {
             case 1:
                 menuJuegosVenta(inventario);
@@ -257,11 +262,11 @@ public void menuJuegosVenta(Inventario inventario) {
         System.out.println("4. Vaciar lista");
         System.out.println("0. Volver");
 
-        int op = scanner.nextInt();
+        int op = Scanner.nextInt();
         switch (op) {
             case 1:
                 System.out.println("Ingrese id del juego:");
-                int id = scanner.nextInt();
+                int id = Scanner.nextInt();
                 JuegoDeMesa j = new JuegoDeMesa(id, "Juego " + id);
                 inventario.agregarJuegoVenta(j);
                 System.out.println("Juego agregado.");
@@ -269,7 +274,7 @@ public void menuJuegosVenta(Inventario inventario) {
 
             case 2:
                 System.out.println("Ingrese índice a eliminar:");
-                int index = scanner.nextInt();
+                int index = Scanner.nextInt();
                 inventario.eliminarProductoJuegoVenta(index);
                 System.out.println("Juego eliminado.");
                 break;
@@ -301,11 +306,11 @@ public void menuJuegosPrestamo(Inventario inventario) {
         System.out.println("4. Vaciar lista");
         System.out.println("0. Volver");
 
-        int op = scanner.nextInt();
+        int op = Scanner.nextInt();
         switch (op) {
             case 1:
                 System.out.println("Ingrese id del juego:");
-                int id = scanner.nextInt();
+                int id = Scanner.nextInt();
                 JuegoDeMesa j = new JuegoDeMesa(id, "Juego " + id);
                 inventario.agregarJuegoPrestamo(j);
                 System.out.println("Juego agregado.");
@@ -313,7 +318,7 @@ public void menuJuegosPrestamo(Inventario inventario) {
 
             case 2:
                 System.out.println("Ingrese índice a eliminar:");
-                int index = scanner.nextInt();
+                int index = Scanner.nextInt();
                 inventario.eliminarProductoJuegoPrestamo(index);
                 System.out.println("Juego eliminado.");
                 break;
@@ -345,12 +350,12 @@ public void menuProductosIngeribles(Inventario inventario) {
         System.out.println("4. Vaciar lista");
         System.out.println("0. Volver");
 
-        int op = scanner.nextInt();
+        int op = Scanner.nextInt();
         switch (op) {
 
             case 1:
                 System.out.println("Ingrese id del producto:");
-                int id = scanner.nextInt();
+                int id = Scanner.nextInt();
                 ProductoIngerible p = new ProductoIngerible(id, "Producto " + id);
                 inventario.agregarProductoIngerible(p);
                 System.out.println("Producto agregado.");
@@ -358,7 +363,7 @@ public void menuProductosIngeribles(Inventario inventario) {
 
             case 2:
                 System.out.println("Ingrese índice a eliminar:");
-                int index = scanner.nextInt();
+                int index = Scanner.nextInt();
                 inventario.eliminarProductoIngerible(index);
                 System.out.println("Producto eliminado.");
                 break;
@@ -411,4 +416,4 @@ public void mostrarProductosIngeribles(Inventario inventario) {
     }
     if (i == 0) System.out.println("No hay productos.");
 }
-
+}

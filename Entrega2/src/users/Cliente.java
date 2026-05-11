@@ -12,9 +12,9 @@ public class Cliente extends Usuario
 	private List<String> juegosFavoritos = new ArrayList<>();
 	
 	//Constructor
-	public Cliente(int id, String nombre, String email, String login, String password, String fechaNacimiento, int puntosFidelidad, String codigoDescuento)
+	public Cliente(String rol, int id, String nombre, String email, String login, String password, String fechaNacimiento, int puntosFidelidad, String codigoDescuento)
 	{
-		super(id, nombre, email, login, password);
+		super(rol, id, nombre, email, login, password);
 		this.setFechaNacimiento(fechaNacimiento);
 		this.setPuntosFidelidad(puntosFidelidad);
 		this.setCodigoDescuento(codigoDescuento);
@@ -67,7 +67,8 @@ public class Cliente extends Usuario
 	@Override
 	public String toLineaTxt() 
 	{
-		return String.format("id, nombre, email, login, password, fechaNacimiento, puntosFidelidad, codigoDescuento",
+		return String.format("rol, id, nombre, email, login, password, fechaNacimiento, puntosFidelidad, codigoDescuento",
+				rol,
 				id,
 				nombre,
 				email,

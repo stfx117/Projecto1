@@ -7,9 +7,9 @@ public abstract class Empleado extends Usuario
 	protected boolean estaEnTurno;
 	
 	//Constructor
-	public Empleado(int id, String nombre, String email, String login, String password, String codigoDesceunto, boolean estaEnTurno)
+	public Empleado(String rol, int id, String nombre, String email, String login, String password, String codigoDesceunto, boolean estaEnTurno)
 	{
-		super(id, nombre, email, login, password);
+		super(rol, id, nombre, email, login, password);
 		this.codigoDescuento = codigoDesceunto;
 		this.estaEnTurno = estaEnTurno;
 	}

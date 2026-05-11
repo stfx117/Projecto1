@@ -1,6 +1,8 @@
 package services;
 
-public class Mesa{
+import interfas.GuardadoTxt;
+
+public class Mesa implements GuardadoTxt{
 	private int id;
 	private int capacidadMaxima;
 	private boolean estaOcupada;
@@ -33,6 +35,15 @@ public class Mesa{
 
 	public void setEstaOcupada(boolean estaOcupada) {
 		this.estaOcupada = estaOcupada;
+	}
+
+	@Override
+	public String toLineaTxt() {
+		
+		return String.format("id, capacidadMaxima, ocupado",
+				id,
+				capacidadMaxima,
+				estaOcupada);
 	}
 	
 	
