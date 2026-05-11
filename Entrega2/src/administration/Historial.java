@@ -25,11 +25,17 @@ public class Historial{
 	}
 	
 	public Venta getVenta(int id) {
-		return this.historialVentas.get(id);
+		if (comprobarVenta(id) == true) {
+			return this.historialVentas.get(id);
+		}
+		return null;
 	}
 	
 	public Prestamo getPrestamo(int id) {
-		return this.historialPrestamos.get(id);
+		if (comprobarPrestamo(id) == true) {
+			return this.historialPrestamos.get(id);
+		}
+		return null;
 	}
 	
 	public boolean comprobarVenta(int id) {

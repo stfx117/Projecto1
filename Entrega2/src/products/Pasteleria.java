@@ -10,8 +10,17 @@ public class Pasteleria extends ProductoIngerible{
 		this.alergenos = new ArrayList<String>();
 	}
 
+	public void agregarAlergeno(String alergeno) {
+		this.alergenos.add(alergeno);
+	}
 	public String getAlergenos(int index) {
-		return alergenos.get(index);
+		if (alergenos.size() > 0) {
+			if (alergenos.size() > index) {
+				return alergenos.get(index);
+			}
+		}
+		return null;
+		
 	}
 
 	public void eliminarAlergenos(int index) {
@@ -24,7 +33,7 @@ public class Pasteleria extends ProductoIngerible{
 
 	@Override
 	public double calcularPrecioFinal() {
-		double precioFinal = getPrecioBase()*(8/100);
+		double precioFinal = (getPrecioBase()*0.08) + getPrecioBase();
 		return precioFinal;
 	}
 

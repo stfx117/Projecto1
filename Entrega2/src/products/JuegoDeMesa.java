@@ -101,7 +101,7 @@ public class JuegoDeMesa extends Producto {
 
 	@Override
 	public double calcularPrecioFinal() {
-		double precioFinal =   (getPrecioBase()*(19/100)) +getPrecioBase();
+		double precioFinal = (getPrecioBase()*0.19) +getPrecioBase();
 		return precioFinal;
 	}
 
