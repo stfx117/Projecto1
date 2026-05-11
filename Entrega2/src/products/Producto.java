@@ -1,10 +1,12 @@
 package products;
 
-public abstract class Producto {
+import interfas.GuardadoTxt;
+
+public abstract class Producto implements GuardadoTxt{
 	protected int id;
-	private String nombre;
-	private double precioBase;
-	private String descripcion;
+	protected String nombre;
+	protected double precioBase;
+	protected String descripcion;
 	
 	public Producto(int id, String nombre, double precioBase, String descripcion) {
 		this.id = id;

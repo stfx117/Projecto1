@@ -14,8 +14,6 @@ public class JuegoDeMesa extends Producto {
 	private EstadoFisico estadoFisico;
 	private Categoria categoria;
 	
-	
-	
 	public JuegoDeMesa(int id, String nombre, double precioBase, String descripcion, int anioPublicacion, String empresa, int minJugadores, int maxJugadores, restriccionEdad restriccionEdad, boolean esDificil, EstadoFisico estadoFisico, Categoria categoria, boolean paraVenta) {
 		super(id, nombre, precioBase, descripcion);
 		this.anioPublicacion = anioPublicacion;
@@ -115,6 +113,20 @@ public class JuegoDeMesa extends Producto {
 	public boolean isExclusivoAdultos() 
 	{
 		return this.restricciones == restriccionEdad.ADULTOS;
+	}
+
+	@Override
+	public String toLineaTxt() {
+		return String.format("anio, empresa, minJugadores, maxJugadores, restricciones, esDifisil, paraVenta, estadoFisico, categoria",
+				this.anioPublicacion,
+				this.empresa,
+				this.minJugadores,
+				this.maxJugadores,
+				this.restricciones,
+				String.valueOf(this.esDificil),
+				String.valueOf(this.paraVenta),
+				this.estadoFisico,
+				this.categoria);
 	}
 
 }

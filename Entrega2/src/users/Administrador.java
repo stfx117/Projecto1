@@ -1,15 +1,20 @@
 package users;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import administration.Historial;
 import administration.Sugerencia;
 import inventory.Inventario;
 import products.JuegoDeMesa;
-import products.Producto;
+import products.ProductoIngerible;
 import products.JuegoDeMesa.Categoria;
 import products.JuegoDeMesa.EstadoFisico;
 import products.JuegoDeMesa.restriccionEdad;
+import products.Producto;
 import sales.Venta;
 import services.Prestamo;
 
@@ -19,9 +24,9 @@ public class Administrador extends Usuario
 	private List<Sugerencia> buzonSugerencias = new ArrayList<>();
 	
 	//Constructor
-	public Administrador(int id, String nombre, String email, String login, String password)
+	public Administrador(String rol, int id, String nombre, String email, String login, String password)
 	{
-		super(id, nombre, email, login, password);
+		super(rol, id, nombre, email, login, password);
 	}
 	
 	//Metodos
@@ -89,7 +94,7 @@ public class Administrador extends Usuario
 		}
 	}
 	
-	public void agregarProducto(Inventario inventario, Producto nuevoProducto)
+	public void agregarProducto(Inventario inventario, ProductoIngerible nuevoProducto)
 	{
 		inventario.agregarProductoIngerible(nuevoProducto);
 	}
@@ -97,7 +102,8 @@ public class Administrador extends Usuario
 	@Override
 	public String toLineaTxt()
 	{
-		return String.format("id, nombre, email, login, password",
+		return String.format("rol, id, nombre, email, login, passweord",
+				rol,
 				id,
 				nombre,
 				email,
@@ -130,5 +136,44 @@ public class Administrador extends Usuario
                 System.out.println("- " + s.getMensaje());
             }
         }
+    }
+    
+    public Map<String, Double> informeEstado(Historial h, LocalDate inicio, LocalDate fin)
+    {
+    	double juegos = 0; 
+    	double comida = 0;
+    	double impuestos = 0; 
+    	double propinas = 0;
+    	
+    	ArrayList<Venta> lista = h.listaVentas();
+    	
+    	for (Venta v : lista) {
+            LocalDate fechaVenta = LocalDate.parse(v.getFecha()); 
+
+            if (!fechaVenta.isBefore(inicio) && !fechaVenta.isAfter(fin)) {
+                
+                impuestos += v.getSubtotal() * 0.19; 
+                if (v.getPropina()) {
+                    propinas += v.getSubtotal() * 0.10;
+                }
+
+                for (Producto p : v.getItems()) {
+                    if (p instanceof JuegoDeMesa) {
+                        juegos += p.getPrecioBase();
+                    } else {
+                        comida += p.getPrecioBase();
+                    }
+                }
+            }
+        }
+    	
+    	Map<String, Double> resultados = new HashMap<>();
+        resultados.put("juegos", juegos);
+        resultados.put("comida", comida);
+        resultados.put("impuestos", impuestos);
+        resultados.put("propinas", propinas);
+        resultados.put("totalNeto", juegos + comida + impuestos + propinas);
+
+        return resultados;
     }
 }	

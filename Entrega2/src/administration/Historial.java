@@ -1,14 +1,15 @@
 package administration;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import sales.Venta;
 import services.Prestamo;
 
 public class Historial{
-	private Map<Integer, Venta> historialVentas;
-	private Map<Integer, Prestamo> historialPrestamos;
+	protected Map<Integer, Venta> historialVentas;
+	protected Map<Integer, Prestamo> historialPrestamos;
 	
 	public Historial() {
 		this.historialVentas = new HashMap<>();
@@ -51,5 +52,16 @@ public class Historial{
 	
 	public void eliminarPrestamo(int id) {
 		this.historialPrestamos.remove(id);
+	}
+	
+	public ArrayList<Venta> listaVentas() {
+		ArrayList<Venta> lista = new ArrayList<>();
+		
+		for(Venta v: historialVentas.values())
+		{
+			lista.add(v);
+		}
+		
+		return lista;
 	}
 }

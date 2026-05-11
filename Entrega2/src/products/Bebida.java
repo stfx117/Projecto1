@@ -31,8 +31,15 @@ public class Bebida extends ProductoIngerible{
 		double precioFinal = (getPrecioBase()*0.08) + getPrecioBase();
 		return precioFinal;
 	}
-	
-	
-	
-	
+
+	@Override
+	public String toLineaTxt() {
+		return String.format("id, nombre, precioBase, descripcion, esAlcoholica, esCaliente",
+				this.id,
+				this.nombre,
+				this.precioBase,
+				this.descripcion,
+				String.valueOf(this.esAlcoholica),
+				String.valueOf(this.esCaliente));
+	}
 }

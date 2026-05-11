@@ -11,10 +11,10 @@ public class BoardGameCafe
 	private  static BoardGameCafe instancia;
 	
 	//Constructor
-	private BoardGameCafe(String nombre)
+	private BoardGameCafe(String nombre) 
 	{
-		this.nombre = nombre;	
-	}
+        this.nombre = nombre;    
+    }
 	
 	//Metodos
 	public String getNombre() 
@@ -49,13 +49,16 @@ public class BoardGameCafe
 	/*Permite tener una unica instancia del cafe
 	 * 
 	 */
-	public static BoardGameCafe getInstancia(String nombre) 
-	{
-        if (instancia == null) 
-        {
+	public static synchronized BoardGameCafe getInstancia(String nombre) {
+        if (instancia == null) {
             instancia = new BoardGameCafe(nombre);
         }
         return instancia;
+    }
+
+    // Método para obtener la instancia cuando ya sabemos que existe
+    public static BoardGameCafe getInstancia() {
+        return instancia; 
     }
 	
 }

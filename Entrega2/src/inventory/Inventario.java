@@ -28,7 +28,18 @@ public class Inventario {
     public void agregarProductoIngerible(ProductoIngerible p) {
         productosIngeribles.add(p);
     }
-
+    
+    public void eliminarProductoJuegoVenta(JuegoDeMesa juego)
+    {
+    	if (juegosVenta.size() > 0) {
+        	for(int i = 0; i < this.juegosVenta.size(); i++){
+        		if(this.juegosVenta.get(i).getId() == juego.getId()) {
+        			this.juegosVenta.remove(i);
+        		}
+        	}
+        }
+    }
+    
     public void eliminarProductoJuegoVenta(int j) {
         juegosVenta.remove(j);
     }
@@ -41,6 +52,16 @@ public class Inventario {
         productosIngeribles.remove(p);
     }
 
+    public ArrayList<JuegoDeMesa> getJuegosVenta()
+    {
+    	return this.juegosVenta;
+    }
+    
+    public ArrayList<JuegoDeMesa> getJuegosPrestamo()
+    {
+    	return this.juegosPrestamo;
+    }
+    
     public JuegoDeMesa getJuegosVenta(int index) {
         if (juegosVenta.size() > 0) {
         	if (juegosVenta.size() > index) {
