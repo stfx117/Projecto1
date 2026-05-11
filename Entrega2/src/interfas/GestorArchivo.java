@@ -9,7 +9,7 @@ public class GestorArchivo
 {
 	private static final String CARPETA = "archivosTxt";
 	
-	public static void guardarEntidad(GuardadoTxt entidad, String rutaArchivo) throws IOException
+	public void guardarEntidad(GuardadoTxt entidad, String rutaArchivo) throws IOException
 	{
 		String ruta = CARPETA + File.separator + rutaArchivo;
 		
