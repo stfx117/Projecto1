@@ -1,1 +1,2 @@
 
+ADMIN,1,Admin General,admin@cafe.com,admin,1234
