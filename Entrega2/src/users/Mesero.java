@@ -40,7 +40,7 @@ public class Mesero extends Empleado
 	public String toLineaTxt() 
 	{
 		
-		return String.format("rol, id, nombre, email, login, password, codigoDesceunto, estaEnTurno, JUEGOSDOMINADOS",
+		return String.format("rol, id, nombre, email, login, password, codigoDesceunto, estaEnTurno",
 				rol,
 				id,
 				nombre,
@@ -48,7 +48,6 @@ public class Mesero extends Empleado
 				login,
 				password,
 				codigoDescuento,
-				estaEnTurno,
-				JUEGOSDOMINADOS);
+				estaEnTurno);
 	}	
 }

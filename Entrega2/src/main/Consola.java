@@ -5,6 +5,7 @@ import java.util.Scanner;
 import cafe.BoardGameCafe;
 import interfas.GestorUsuario;
 import interfas.GestorArchivo;
+import interfas.GestorInventario;
 import users.Administrador;
 import users.Cliente;
 import users.Cocinero;
@@ -17,6 +18,7 @@ public class Consola
     private BoardGameCafe cafe;
     private GestorUsuario gestorU;
     private GestorArchivo gestorA;
+    private GestorInventario gestorI;
     
     public Consola()
     {
@@ -84,6 +86,44 @@ public class Consola
 
         System.out.println("¡Registro exitoso! Ya puedes iniciar sesión.");
 	}
+    
+    private void registrarNuevoEmpleado() {
+    	System.out.println("\n--- REGISTRO DE NUEVO EMPLEADO ---");
+        
+    	System.out.println("Rol(MESERO o COCINERO):");
+    	String rol = sc.nextLine();
+        System.out.print("Nombre completo: ");
+        String nombre = sc.nextLine();
+        System.out.print("Correo electrónico: ");
+        String email = sc.nextLine();
+        System.out.print("Cree un nombre de usuario (login): ");
+        String login = sc.nextLine();
+        System.out.print("Cree una contraseña: ");
+        String password = sc.nextLine();
+        System.out.print("Codigo de descuento: ");
+        String codigo = sc.nextLine();
+
+        int nuevoId = gestorU.generarNuevoId();
+        
+        Usuario nuevoEmpleado = null;
+        
+        switch (rol.toUpperCase()) {
+        case "MESERO":   
+        	nuevoEmpleado = new Mesero(rol, nuevoId, nombre, email, login, password, codigo, false); 
+        	break;
+        case "COCINERO": 
+        	nuevoEmpleado = new Cocinero(rol, nuevoId, nombre, email, login, password, codigo, false); 
+        	break;
+        }
+        gestorU.agregarUsuario(nuevoEmpleado);
+
+        try {gestorA.guardarEntidad(nuevoEmpleado, "usuarios.txt");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+        System.out.println("¡Registro exitoso! Ya puedes iniciar sesión.");
+	}
 
     
 	private boolean realizarLogin() {
@@ -128,12 +168,100 @@ public class Consola
 	}
 
 	private void mostrarMesero(Mesero u) {
-		// TODO Auto-generated method stub
+		int opcion = 0;
 		
+		do {
+			System.out.println("\n--- PANEL DE MESERO ---");
+	        System.out.println("1. ");
+	        System.out.println("2. ");
+	        System.out.println("3. ");
+	        System.out.println("4. ");
+	        System.out.println("5. Cerrar Sesión");
+	        System.out.print("Seleccione una opción: ");
+	        
+	        try {
+            	opcion = Integer.parseInt(sc.nextLine());
+            	switch (opcion) {
+            	case 1:
+            		break;
+            	case 2:
+            		
+            		break;
+            	case 3:
+            		
+                    break;
+            	case 4:
+            		
+            		break;
+            	case 5:
+            		System.out.println("Sesión cerrada.");
+                default:
+                    System.out.println("Opción no válida.");
+            	}
+            } catch(Exception e) {
+            	
+            }
+	        
+		}while (opcion != 5);
 	}
 
 	private void mostrarAdmin(Administrador u) {
-		// TODO Auto-generated method stub
+		int opcion = 0;
 		
+		do {
+			System.out.println("\n--- PANEL DE ADMINISTRACIÓN ---");
+	        System.out.println("1. Registrar nuevo Empleado (Mesero/Cocinero/)");
+	        System.out.println("2. Comprar juego");
+	        System.out.println("3. Reparar juego");
+	        System.out.println("4. Mover juego");
+	        System.out.println("5. Ver solicitudes pendientes");
+	        System.out.println("6. Generar Reporte");
+	        System.out.println("7. Cerrar Sesión");
+	        System.out.print("Seleccione una opción: ");
+	        
+	        try {
+            	opcion = Integer.parseInt(sc.nextLine());
+            	switch (opcion) {
+            	case 1:
+            		registrarNuevoEmpleado();
+            		break;
+            	case 2:
+            		
+            		break;
+            	case 3:
+            		System.out.print("Ingrese el ID del juego a reparar: ");
+            	    int idReparar = Integer.parseInt(sc.nextLine());
+            	    
+            	    u.reparaJuego(gestorI.getInventario(), idReparar);
+            	    
+            	    gestorI.actualizarArchivoProductos(); 
+            	    System.out.println("Juego reparado.");
+                    break;
+            	case 4:
+            		System.out.print("Ingrese el ID del juego a mover a préstamo: ");
+            	    int idMover = Integer.parseInt(sc.nextLine());
+            	    
+            	    u.moverjuego(gestorI.getInventario(), idMover);
+            	    
+            	    gestorI.actualizarArchivoProductos();
+            	    System.out.println("El juego ha sido movido a la sección de préstamos.");
+            		break;
+            	case 5:
+            		System.out.println("--- BUZÓN DE SUGERENCIAS ---");
+            	    u.verSugerenciasPendientes();
+            		break;
+            	case 6:
+            		
+            		break;
+            	case 7:
+            		System.out.println("Sesión cerrada.");
+                default:
+                    System.out.println("Opción no válida.");
+            	}
+            } catch(Exception e) {
+            	
+            }
+	        
+		}while (opcion != 7);
 	}
 }
