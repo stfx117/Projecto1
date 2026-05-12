@@ -1,5 +1,6 @@
 package administration;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,15 +38,20 @@ public class Turno implements GuardadoTxt
 	@Override
 	public String toLineaTxt() {
 		StringBuilder sb = new StringBuilder();
+	    
+	    sb.append("TURNO").append(",");
 	    sb.append(empleado.getId()).append(",");
 
+	    List<String> bloquesDias = new ArrayList<>();
 	    for (Map.Entry<String, List<String>> entrada : DIASEMANAHORA.entrySet()) {
 	        String dia = entrada.getKey();
 	        List<String> horas = entrada.getValue();
 	        
-	        sb.append(dia).append(",");
-	        sb.append(String.join("-", horas));
+	        String bloqueHoras = dia + ":" + String.join("-", horas);
+	        bloquesDias.add(bloqueHoras);
 	    }
+	    
+	    sb.append(String.join(";", bloquesDias));
 
 	    return sb.toString();
 	}

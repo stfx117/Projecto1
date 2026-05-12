@@ -89,6 +89,10 @@ public class Inventario {
         return null;
     }
     
+    public ArrayList<ProductoIngerible> getProductosIngeribles() {
+        return this.productosIngeribles;
+    }
+    
     public void vaciarJuegosVenta() {
     	juegosVenta.clear();
     }

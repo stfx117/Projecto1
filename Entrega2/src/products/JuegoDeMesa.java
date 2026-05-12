@@ -117,16 +117,11 @@ public class JuegoDeMesa extends Producto {
 
 	@Override
 	public String toLineaTxt() {
-		return String.format("anio, empresa, minJugadores, maxJugadores, restricciones, esDifisil, paraVenta, estadoFisico, categoria",
-				this.anioPublicacion,
-				this.empresa,
-				this.minJugadores,
-				this.maxJugadores,
-				this.restricciones,
-				String.valueOf(this.esDificil),
-				String.valueOf(this.paraVenta),
-				this.estadoFisico,
-				this.categoria);
+		return String.format("%s,%d,%s,%.2f,%s,%d,%s,%d,%d,%s,%b,%s,%s",
+		        (this.isParaVenta() ? "JUEGO_VENTA" : "JUEGO_PRESTAMO"),
+		        this.id, this.nombre, this.precioBase, this.descripcion,
+		        this.anioPublicacion, this.empresa, this.minJugadores, this.maxJugadores,
+		        this.restricciones.toString(), this.esDificil, this.estadoFisico.toString(), this.categoria.toString());
 	}
 
 }

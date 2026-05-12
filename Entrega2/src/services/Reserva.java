@@ -119,14 +119,14 @@ public class Reserva implements GuardadoTxt
 
 	@Override
 	public String toLineaTxt() {
-		return String.format("id, cliente, mesa, personas, menores5anios, jovenes, estadia", 
-				this.id,
-				this.cliente.getNombre(),
-				this.mesa.getId(),
-				this.personas,
-				String.valueOf(this.menores5Anios),
-				String.valueOf(this.hayJovenes),
-				this.estadia);
+		return String.format("%d,%d,%d,%d,%b,%b,%s", 
+	            this.id,
+	            this.cliente.getId(),      
+	            this.mesa.getId(),
+	            this.personas,
+	            this.menores5Anios,        
+	            this.hayJovenes,
+	            this.estadia);
 	}
 	
 }

@@ -1,0 +1,2 @@
+JUEGO_VENTA,1,Catan,150,00,Juego de estrategia de colonización,1995,Kosmos,3,4,MAYORES_5,false,NUEVO,TABLERO
+JUEGO_PRESTAMO,2,Dixit,0,00,Juego de cartas e imaginación,2008,Libellud,3,6,TODOS,false,OPTIMO,CARTAS

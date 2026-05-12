@@ -63,7 +63,7 @@ public class Sugerencia implements GuardadoTxt
 
 	@Override
 	public String toLineaTxt() {
-		return String.format("id, empleado, mensaje, leida, ",
+		return String.format("%d,%d,%s,%b",
                 id,
                 empleado.getId(),               
                 mensaje.replace(",", ""),    
