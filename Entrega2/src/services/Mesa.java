@@ -40,7 +40,7 @@ public class Mesa implements GuardadoTxt{
 	@Override
 	public String toLineaTxt() {
 		
-		return String.format("id, capacidadMaxima, ocupado",
+		return String.format("%d,%d,%b",
 				id,
 				capacidadMaxima,
 				estaOcupada);

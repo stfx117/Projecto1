@@ -59,7 +59,7 @@ public class Administrador extends Usuario
 	{
 		JuegoDeMesa nuevoJuego = new JuegoDeMesa(id, nombre, precioBase, descripcion, anioPublicacion, empresa, minJugadores, maxJugadores, restriccionEdad, esDificil, estadoFisico, categoria, paraVenta);
 		
-		if(nuevoJuego.isParaVenta() && nuevoJuego.getEstadoFisico() == EstadoFisico.NUEVO)
+		if(nuevoJuego.isParaVenta())
 		{
 			inventario.agregarJuegoVenta(nuevoJuego);
 		} else
@@ -102,7 +102,7 @@ public class Administrador extends Usuario
 	@Override
 	public String toLineaTxt()
 	{
-		return String.format("rol, id, nombre, email, login, passweord",
+		return String.format("%s,%d,%s,%s,%s,%s",
 				rol,
 				id,
 				nombre,

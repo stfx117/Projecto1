@@ -67,7 +67,7 @@ public class Cliente extends Usuario
 	@Override
 	public String toLineaTxt() 
 	{
-		return String.format("rol, id, nombre, email, login, password, fechaNacimiento, puntosFidelidad, codigoDescuento",
+		return String.format("%s,%d,%s,%s,%s,%s,%s,%d,%s",
 				rol,
 				id,
 				nombre,
