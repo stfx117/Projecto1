@@ -51,44 +51,66 @@ public class GestorUsuario
         try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                String[] datos = linea.split(",");
-                String rol = datos[0];
-                int id = Integer.parseInt(datos[1]);
-                String nombre = datos[2];
-                String email = datos[3];
-                String login = datos[4];
-                String password = datos[5];
-
-                Usuario u = null;
                 
-                switch (rol.toUpperCase()) {
-                    case "ADMIN":    
-                    	u = new Administrador(rol, id, nombre, email, login, password); 
-                    	break;
-                    case "MESERO":   
-                    	String codigoDesceunto = datos[6];
-                    	boolean estaEnTurno = Boolean.parseBoolean(datos[7]);
-                    	u = new Mesero(rol, id, nombre, email, login, password, codigoDesceunto, estaEnTurno); 
-                    	break;
-                    case "COCINERO": 
-                    	String codigoDesceunto1 = datos[6];
-                    	boolean estaEnTurno1 = Boolean.parseBoolean(datos[7]);
-                    	u = new Cocinero(rol, id, nombre, email, login, password, codigoDesceunto1, estaEnTurno1); 
-                    	break;
-                    case "CLIENTE":  
-                    	String fechaNacimiento = datos[6];
-                    	int puntosFidelidad = Integer.parseInt(datos[7]);
-                    	String codigoDescuento = datos[8];
-                    	u = new Cliente(rol, id, nombre, email, login, password, fechaNacimiento, puntosFidelidad, codigoDescuento); 
-                    	break;
+                if (linea.trim().isEmpty()) {
+                    continue; 
                 }
 
-                if (u != null) {
-                    mapaUsuarios.put(login, u);
+                String[] datos = linea.split(",");
+
+                if (datos.length < 6) {
+                    System.err.println("Saltando línea mal formateada: " + linea);
+                    continue;
+                }
+
+                try {
+                    String rol = datos[0].trim();
+                    int id = Integer.parseInt(datos[1].trim());
+                    String nombre = datos[2].trim();
+                    String email = datos[3].trim();
+                    String login = datos[4].trim();
+                    String password = datos[5].trim();
+
+                    Usuario u = null;
+                    
+                    switch (rol.toUpperCase()) {
+                        case "ADMIN":    
+                            u = new Administrador(rol, id, nombre, email, login, password); 
+                            break;
+                        case "MESERO":   
+                            if (datos.length >= 8) {
+                                String turno = datos[6].trim();
+                                boolean estaDisponible = Boolean.parseBoolean(datos[7].trim());
+                                u = new Mesero(rol, id, nombre, email, login, password, turno, estaDisponible);
+                            }
+                            break;
+                        case "COCINERO": 
+                            if (datos.length >= 8) {
+                                String especialidad = datos[6].trim();
+                                boolean enTurno = Boolean.parseBoolean(datos[7].trim());
+                                u = new Cocinero(rol, id, nombre, email, login, password, especialidad, enTurno);
+                            }
+                            break;
+                        case "CLIENTE":  
+                            if (datos.length >= 9) {
+                                String fechaNac = datos[6].trim();
+                                int puntos = Integer.parseInt(datos[7].trim());
+                                String cod = datos[8].trim();
+                                u = new Cliente(rol, id, nombre, email, login, password, fechaNac, puntos, cod);
+                            }
+                            break;
+                    }
+
+                    if (u != null) {
+                        mapaUsuarios.put(login, u);
+                    }
+
+                } catch (NumberFormatException e) {
+                    System.err.println("Error de formato numérico en línea: " + linea);
                 }
             }
         } catch (IOException e) {
-            System.out.println("No se pudo cargar el archivo de usuarios, iniciando mapa vacío.");
+            System.out.println("No se pudo cargar el archivo de usuarios.");
         }
     }
 
