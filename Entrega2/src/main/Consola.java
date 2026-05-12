@@ -1,11 +1,18 @@
 package main;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import administration.Sugerencia;
 import cafe.BoardGameCafe;
 import interfas.GestorUsuario;
+import products.JuegoDeMesa;
 import interfas.GestorArchivo;
 import interfas.GestorInventario;
+import interfas.GestorHistorial;
+import interfas.GestorSugerencias;
 import users.Administrador;
 import users.Cliente;
 import users.Cocinero;
@@ -19,6 +26,8 @@ public class Consola
     private GestorUsuario gestorU;
     private GestorArchivo gestorA;
     private GestorInventario gestorI;
+    private GestorHistorial gestorH;
+    private GestorSugerencias gestorS;
     
     public Consola()
     {
@@ -226,7 +235,39 @@ public class Consola
             		registrarNuevoEmpleado();
             		break;
             	case 2:
-            		
+            		System.out.println("\n--- COMPRA DE NUEVO JUEGO DE MESA ---");
+            	    
+            	    System.out.print("Nombre: "); String nom = sc.nextLine();
+            	    System.out.print("Precio Base: "); double precio = Double.parseDouble(sc.nextLine());
+            	    System.out.print("Descripción: "); String desc = sc.nextLine();
+            	    System.out.print("Año Publicación: "); int anio = Integer.parseInt(sc.nextLine());
+            	    System.out.print("Empresa: "); String emp = sc.nextLine();
+            	    System.out.print("Min Jugadores: "); int minJ = Integer.parseInt(sc.nextLine());
+            	    System.out.print("Max Jugadores: "); int maxJ = Integer.parseInt(sc.nextLine());
+
+            	    System.out.println("Restricción de Edad (1. TODOS, 2. MAYORES_5, 3. ADULTOS): ");
+            	    int resOpt = Integer.parseInt(sc.nextLine());
+            	    JuegoDeMesa.restriccionEdad res = (resOpt == 1) ? JuegoDeMesa.restriccionEdad.TODOS : 
+            	                                      (resOpt == 2) ? JuegoDeMesa.restriccionEdad.MAYORES_5 : 
+            	                                                      JuegoDeMesa.restriccionEdad.ADULTOS;
+
+            	    System.out.println("Categoría (1. CARTAS, 2. TABLERO, 3. ACCION): ");
+            	    int catOpt = Integer.parseInt(sc.nextLine());
+            	    JuegoDeMesa.Categoria cat = (catOpt == 1) ? JuegoDeMesa.Categoria.CARTAS : 
+            	                                (catOpt == 2) ? JuegoDeMesa.Categoria.TABLERO : 
+            	                                                JuegoDeMesa.Categoria.ACCION;
+
+            	    System.out.print("¿Es difícil? (true/false): "); boolean dif = Boolean.parseBoolean(sc.nextLine());
+            	    System.out.print("¿Es para la venta? (true/false): "); boolean paraV = Boolean.parseBoolean(sc.nextLine());
+
+            	    int nuevoId = gestorI.generarNuevoIdProducto();
+
+            	    u.comprarJuego(gestorI.getInventario(), nuevoId, nom, precio, desc, anio, emp, 
+            	                   minJ, maxJ, res, dif, JuegoDeMesa.EstadoFisico.NUEVO, cat, paraV);
+
+            	    gestorI.actualizarArchivoProductos();
+
+            	    System.out.println("Juego comprado y registrado con ID: " + nuevoId);
             		break;
             	case 3:
             		System.out.print("Ingrese el ID del juego a reparar: ");
@@ -247,11 +288,44 @@ public class Consola
             	    System.out.println("El juego ha sido movido a la sección de préstamos.");
             		break;
             	case 5:
-            		System.out.println("--- BUZÓN DE SUGERENCIAS ---");
-            	    u.verSugerenciasPendientes();
-            		break;
+            		System.out.println("\n--- SOLICITUDES PENDIENTES ---");
+            	    List<Sugerencia> lista = gestorS.getSugerencias();
+            	    boolean hayPendientes = false;
+
+            	    for (Sugerencia s : lista) {
+            	        if (!s.isLeida()) {
+            	            System.out.println("ID: " + s.getId() + " | De: " + s.getEmpleado().getNombre());
+            	            System.out.println("Mensaje: " + s.getMensaje());
+            	            System.out.println("-----------------------------------");
+            	            s.setLeida(true);
+            	            hayPendientes = true;
+            	        }
+            	    }
+
+            	    if (!hayPendientes) {
+            	        System.out.println("No hay sugerencias nuevas.");
+            	    } else {
+            	        gestorS.actualizarArchivo();
+            	    }
+            	    break;
             	case 6:
-            		
+            		try {
+            	        System.out.print("Ingrese fecha inicio (AAAA-MM-DD): ");
+            	        LocalDate inicio = LocalDate.parse(sc.nextLine());
+            	        System.out.print("Ingrese fecha fin (AAAA-MM-DD): ");
+            	        LocalDate fin = LocalDate.parse(sc.nextLine());
+
+            	        Map<String, Double> datos = u.informeEstado(gestorH.getHistorial(), inicio, fin);
+
+            	        System.out.println("\n--- RESULTADOS DEL PERIODO ---");
+            	        System.out.println("Ingresos por Juegos: $" + datos.get("juegos"));
+            	        System.out.println("Ingresos por Comida: $" + datos.get("comida"));
+            	        System.out.println("Impuestos (IVA): $" + datos.get("impuestos"));
+            	        System.out.println("Propinas: $" + datos.get("propinas"));
+            	        System.out.println("TOTAL NETO: $" + datos.get("totalNeto"));
+            	    } catch (Exception e) {
+            	        System.out.println("Error: Formato de fecha inválido o datos insuficientes.");
+            	    }
             		break;
             	case 7:
             		System.out.println("Sesión cerrada.");

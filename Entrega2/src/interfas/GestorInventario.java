@@ -11,6 +11,7 @@ import inventory.Inventario;
 import products.Bebida;
 import products.JuegoDeMesa;
 import products.Pasteleria;
+import products.Producto;
 import products.ProductoIngerible;
 
 public class GestorInventario {
@@ -43,6 +44,19 @@ public class GestorInventario {
         } catch (IOException e) {
             System.err.println("Error al actualizar el archivo de inventario.");
         }
+    }
+    
+    public Producto buscarProductoPorId(int id) {
+        for (JuegoDeMesa j : inventario.getJuegosVenta()) {
+            if (j.getId() == id) return j;
+        }
+        for (JuegoDeMesa j : inventario.getJuegosPrestamo()) {
+            if (j.getId() == id) return j;
+        }
+        for (ProductoIngerible p : inventario.getProductosIngeribles()) {
+            if (p.getId() == id) return p;
+        }
+        return null; 
     }
     
     private void cargarProductos() {
@@ -92,5 +106,29 @@ public class GestorInventario {
 
 	public Inventario getInventario() {
 		return this.inventario;
+	}
+	
+	public int generarNuevoIdProducto() {
+	    int maxId = 0;
+
+	    for (JuegoDeMesa j : inventario.getJuegosVenta()) {
+	        if (j.getId() > maxId) {
+	            maxId = j.getId();
+	        }
+	    }
+
+	    for (JuegoDeMesa j : inventario.getJuegosPrestamo()) {
+	        if (j.getId() > maxId) {
+	            maxId = j.getId();
+	        }
+	    }
+
+	    for (ProductoIngerible p : inventario.getProductosIngeribles()) {
+	        if (p.getId() > maxId) {
+	            maxId = p.getId();
+	        }
+	    }
+
+	    return maxId + 1;
 	}
 }

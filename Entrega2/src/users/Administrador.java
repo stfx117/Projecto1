@@ -102,7 +102,7 @@ public class Administrador extends Usuario
 	@Override
 	public String toLineaTxt()
 	{
-		return String.format("rol, id, nombre, email, login, passweord",
+		return String.format("%s,%d,%s,%s,%s,%s",
 				rol,
 				id,
 				nombre,

@@ -107,4 +107,13 @@ public class GestorUsuario
 	    
 	    return maxId + 1;
 	}
+	
+	public Usuario buscarUsuarioPorId(int id) {
+	    for (Usuario u : mapaUsuarios.values()) {
+	        if (u.getId() == id) {
+	            return u;
+	        }
+	    }
+	    return null; 
+	}
 }

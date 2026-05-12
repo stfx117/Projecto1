@@ -101,9 +101,9 @@ public class Prestamo implements GuardadoTxt{
 		StringBuilder prestamo = new StringBuilder();
 		
 		prestamo.append(this.id).append(",");
-		prestamo.append(this.mesaAsociada.getId()).append("-Mesa,");
+		prestamo.append(this.mesaAsociada.getId()).append(",");
 		prestamo.append(this.advertenciaSinMesero).append(",");
-		prestamo.append(this.clienteAsociado.getNombre()).append(",");
+		prestamo.append(this.clienteAsociado.getId()).append(",");
 		
 		if(this.juegos != null && !this.juegos.isEmpty())
 		{
@@ -117,7 +117,7 @@ public class Prestamo implements GuardadoTxt{
 			
 		} else
 		{
-			prestamo.append("Sin juegos");
+			prestamo.append("NONE");
 		}
 		
 		return prestamo.toString();

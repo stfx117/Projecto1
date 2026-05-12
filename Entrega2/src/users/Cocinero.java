@@ -12,7 +12,7 @@ public class Cocinero extends Empleado
 	@Override
 	public String toLineaTxt() {
 		
-		return String.format("rol, id, nombre, email, login, password, codigoDesceunto, estaEnTurno",
+		return String.format("%s,%d,%s,%s,%s,%s,%s,%b",
 				rol,
 				id,
 				nombre,

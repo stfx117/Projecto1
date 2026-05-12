@@ -46,7 +46,11 @@ public class Venta implements GuardadoTxt{
 		}
 		return null;
 	}
-
+	
+	public ArrayList<Producto> getItems() {
+		return this.items;
+	}
+	
 	public double getSubtotal() {
 		return subtotal;
 	}
@@ -95,36 +99,24 @@ public class Venta implements GuardadoTxt{
 
 	@Override
 	public String toLineaTxt() {
-		StringBuilder venta = new StringBuilder();
-		
-		venta.append(this.id).append(",");
-		venta.append(this.fecha).append(",");
-		venta.append(this.propina).append(",");
-		venta.append(this.subtotal).append(",");
-		venta.append(this.subtotal).append(",");
-		
-		if(this.items != null && !this.items.isEmpty())
-		{
-			List<String> idProductos = new ArrayList<>();
-			
-			for(Producto p: this.items)
-			{
-				idProductos.add(String.valueOf(p.getId()));
-			}
-			
-			venta.append(String.join("-", idProductos));
-		} else
-		{
-			venta.append("sin Prodcutos");
-		}
-		
-		return venta.toString();
-	}
-	
-	public ArrayList<Producto> getItems() {
-	    if (this.items == null) {
-	        return new ArrayList<>();
+		StringBuilder sb = new StringBuilder();
+	    
+	    sb.append("VENTA").append(",");
+	    sb.append(this.id).append(",");
+	    sb.append(this.fecha).append(","); 
+	    sb.append(this.propina).append(",");
+	    sb.append(this.subtotal).append(","); 
+	    
+	    if(this.items != null && !this.items.isEmpty()) {
+	        List<String> idProductos = new ArrayList<>();
+	        for(Producto p : this.items) {
+	            idProductos.add(String.valueOf(p.getId()));
+	        }
+	        sb.append(String.join("-", idProductos));
+	    } else {
+	        sb.append("VACIO");
 	    }
-	    return this.items;
+	    
+	    return sb.toString();
 	}
 }
