@@ -6,7 +6,6 @@ import java.util.List;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.Scanner;
-
 import administration.Sugerencia;
 import administration.Turno;
 import cafe.BoardGameCafe;
