@@ -12,6 +12,7 @@ public class GestorSugerencias {
     private List<Sugerencia> sugerencias;
     private GestorUsuario gestorU;
     private static final String ARCHIVO = "archivosTxt/sugerencias.txt";
+    private GestorArchivo gestorA;
 
     public GestorSugerencias(GestorUsuario gestorU) {
         this.sugerencias = new ArrayList<>();
@@ -50,11 +51,11 @@ public class GestorSugerencias {
 
     public void guardarNuevaSugerencia(Sugerencia s) {
         sugerencias.add(s);
-        try (PrintWriter pw = new PrintWriter(new FileWriter(ARCHIVO, true))) {
-            pw.println(s.toLineaTxt());
-        } catch (IOException e) {
-            System.err.println("Error al guardar sugerencia: " + e.getMessage());
-        }
+        try {
+			gestorA.guardarEntidad(s, "sugerencias.txt");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     public void actualizarArchivo() {
@@ -68,7 +69,7 @@ public class GestorSugerencias {
     }
 
     public List<Sugerencia> getSugerencias() {
-        return sugerencias;
+        return this.sugerencias;
     }
     
     public int generarNuevoId() {

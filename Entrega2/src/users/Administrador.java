@@ -59,7 +59,7 @@ public class Administrador extends Usuario
 	{
 		JuegoDeMesa nuevoJuego = new JuegoDeMesa(id, nombre, precioBase, descripcion, anioPublicacion, empresa, minJugadores, maxJugadores, restriccionEdad, esDificil, estadoFisico, categoria, paraVenta);
 		
-		if(nuevoJuego.isParaVenta() && nuevoJuego.getEstadoFisico() == EstadoFisico.NUEVO)
+		if(nuevoJuego.isParaVenta())
 		{
 			inventario.agregarJuegoVenta(nuevoJuego);
 		} else

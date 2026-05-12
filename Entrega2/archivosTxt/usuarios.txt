@@ -1,2 +1,5 @@
 
 ADMIN,1,Admin General,admin@cafe.com,admin,1234
+MESERO,2,Juan Perez,juan@cafe.com,juan,m123,TARDE,false
+COCINERO,3,Chef Maria,maria@cafe.com,maria,c123,REPOSTERIA,false
+CLIENTE,4,Lucas Gomez,lucas@mail.com,lucas,l123,1995-05-10,0,NINGUNO

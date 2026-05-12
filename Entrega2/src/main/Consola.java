@@ -38,6 +38,10 @@ public class Consola
     	this.cafe = BoardGameCafe.getInstancia("BoardGameCafe");
     	this.gestorU = new GestorUsuario();
     	this.gestorA = new GestorArchivo();
+    	this.gestorI = new GestorInventario();
+    	this.gestorH = new GestorHistorial(gestorI);
+    	this.gestorS = new GestorSugerencias(gestorU);
+    	this.gestorT = new GestorTurno(gestorU);
     }
     
     public void iniciar() {
@@ -351,24 +355,29 @@ public class Consola
             	    System.out.println("El juego ha sido movido a la sección de préstamos.");
             		break;
             	case 5:
-            		System.out.println("\n--- SOLICITUDES PENDIENTES ---");
+            		System.out.println("\n--- SUGERENCIAS PENDIENTES ---");
             	    List<Sugerencia> lista = gestorS.getSugerencias();
-            	    boolean hayPendientes = false;
-
-            	    for (Sugerencia s : lista) {
-            	        if (!s.isLeida()) {
-            	            System.out.println("ID: " + s.getId() + " | De: " + s.getEmpleado().getNombre());
-            	            System.out.println("Mensaje: " + s.getMensaje());
-            	            System.out.println("-----------------------------------");
-            	            s.setLeida(true);
-            	            hayPendientes = true;
-            	        }
-            	    }
-
-            	    if (!hayPendientes) {
-            	        System.out.println("No hay sugerencias nuevas.");
+            	    
+            	    if (lista == null || lista.isEmpty()) {
+            	    	System.out.println("No hay ninguna sugerencia registrada en el sistema.");
             	    } else {
-            	        gestorS.actualizarArchivo();
+            	    	boolean hayPendientes = false;
+            	    
+            	    	for (Sugerencia s : lista) {
+            	    		if (!s.isLeida()) {
+            	    			System.out.println("ID: " + s.getId() + " | De: " + s.getEmpleado().getNombre());
+            	    			System.out.println("Mensaje: " + s.getMensaje());
+            	    			System.out.println("-----------------------------------");
+            	    			s.setLeida(true);
+            	    			hayPendientes = true;
+            	    		}
+            	    	}
+
+            	    	if (!hayPendientes) {
+            	    		System.out.println("No hay sugerencias nuevas.");
+            	    	} else {
+            	    		gestorS.actualizarArchivo();
+            	    	}
             	    }
             	    break;
             	case 6:
