@@ -181,220 +181,198 @@ public class Consola
     }
 
     private void mostrarCocinero(Cocinero u) {
-        int opcion = -1;
-        while (opcion != 0) {
-            System.out.println("\n--- MENU COCINERO ---");
-            System.out.println("1. Sugerir turno");
-            System.out.println("2. Sugerir producto");
-            System.out.println("3. Realizar compra");
-            System.out.println("0. Cerrar sesión");
-            try {
-                opcion = Integer.parseInt(sc.nextLine());
-                switch(opcion) {
-                    case 1:
-                        sugerirTurno(u);
-                        break;
-                    case 2:
-                        sugerirProducto(u);
-                        break;
-                    case 3:
-                        realizarVentaCocinero(u);
-                        break;
-                    case 0:
-                        System.out.println("Sesión cerrada.");
-                        break;
-                    default:
-                        System.out.println("Opción inválida.");
-                }
-            } catch(Exception e) {
-                System.out.println("Error en entrada.");
-            }
-        }
+    	int opcion = 0;
+    	do {
+    		System.out.println("\n--- PANEL COCINERO ---");
+    		System.out.println("1. Planear turno");
+    		System.out.println("2. Realizar sugerencia de producto");
+    		System.out.println("3. Comprar producto con descuento");
+    		System.out.println("4. Cerrar sesión");
+    		System.out.print("Seleccione una opción: ");
+    		try {
+    			opcion = Integer.parseInt(sc.nextLine());
+    			switch(opcion) {
+    			case 1:
+    				System.out.println("\n--- PLANEAR TURNO ---");
+    				Turno nuevoTurno = new Turno(u);
+    				String continuarTurno = "s";
+    				while(continuarTurno.equalsIgnoreCase("s")) {
+    					System.out.print("Día (LUNES, MARTES, etc): ");
+    					String dia = sc.nextLine().toUpperCase();
+    					System.out.print("Horario (Ej: 08:00-12:00): ");
+    					String horario = sc.nextLine();
+    					nuevoTurno.getDIASEMANAHORA().putIfAbsent(dia, new ArrayList<>());
+    					nuevoTurno.getDIASEMANAHORA().get(dia).add(horario);
+    					System.out.print("¿Agregar otro horario? (s/n): ");
+    					continuarTurno = sc.nextLine();
+    				}
+    				gestorT.guardarTurno(nuevoTurno); 
+            	    System.out.println("Turno guardado correctamente.");
+    				break;
+    			case 2:
+    				System.out.println("\n--- SUGERENCIA DE PRODUCTO ---");
+    				System.out.print("Escriba la sugerencia: ");
+    				String msj = sc.nextLine();
+             	    int idSugerencia = gestorS.generarNuevoId();
+             	    Sugerencia nuevaS = new Sugerencia(idSugerencia, u, msj);
+             	    gestorS.guardarNuevaSugerencia(nuevaS);
+             	    System.out.println("Sugerencia enviada con éxito.");
+    				break;
+    			case 3:
+    				System.out.println("\n--- COMPRA CON DESCUENTO ---");
+    				System.out.print("Ingrese su código de descuento: ");
+    				String codigo = sc.nextLine();
+    				if(codigo.equalsIgnoreCase(u.getCodigoDescuento())) {
+    					System.out.println("Código válido.");
+    					System.out.print("ID venta: ");
+    					int idVenta = Integer.parseInt(sc.nextLine());
+    					System.out.print("Fecha: ");
+    					String fecha = sc.nextLine();
+    					Venta venta = new Venta(idVenta, fecha, false);
+    					String continuarCompra = "s";
+    					while(continuarCompra.equalsIgnoreCase("s")) {
+    						System.out.print("Ingrese ID del producto: ");
+    						int idProducto = Integer.parseInt(sc.nextLine());
+    						Producto producto = gestorI.buscarProductoPorId(idProducto);
+    						if(producto != null) {
+    							venta.agregarProducto(producto);
+    							double precioDescuento = producto.getPrecioBase() * 0.80;
+    							System.out.println("Producto agregado: " + producto.getNombre());
+    							System.out.println("Precio original: " + producto.getPrecioBase());
+    							System.out.println("Precio con descuento empleado: " + precioDescuento);
+    						} else {
+    							System.out.println("Producto no encontrado.");
+    						}
+    						System.out.print("¿Agregar otro producto? (s/n): ");
+    						continuarCompra = sc.nextLine();
+    					}
+    					venta.calcularPrecio();
+    					double totalDescuento = venta.getSubtotal() * 0.80;
+    					System.out.println("\nCompra finalizada.");
+    					System.out.println("Subtotal original: " + venta.getSubtotal());
+    					System.out.println("Total con descuento: " + totalDescuento);
+    				} else {
+    					System.out.println("Código inválido.");
+    				}
+    				break;
+    			case 4:
+    				System.out.println("Sesión cerrada.");
+    				break;
+    			default:
+    				System.out.println("Opción inválida.");
+    			}
+    		} catch(Exception e) {
+    			System.out.println("Error en la operación.");
+    		}
+    	} while(opcion != 4);
     }
-    
-    private void sugerirTurno(Cocinero cocinero) {
-        System.out.println("\n--- SUGERIR TURNO ---");
-        Turno turno = new Turno(cocinero);
-        System.out.print("Ingrese día: ");
-        String dia = sc.nextLine();
-        System.out.print("Ingrese hora inicio: ");
-        String inicio = sc.nextLine();
-        System.out.print("Ingrese hora fin: ");
-        String fin = sc.nextLine();
-        List<String> horas = new ArrayList<>();
-        horas.add(inicio);
-        horas.add(fin);
-        turno.getDIASEMANAHORA().put(dia, horas);
-        System.out.println("Turno sugerido correctamente.");
-        System.out.println(turno.toLineaTxt());
-    }
-    
-    private void sugerirProducto(Cocinero cocinero) {
-        System.out.println("\n--- SUGERIR PRODUCTO ---");
-        System.out.print("Ingrese ID sugerencia: ");
-        int id = Integer.parseInt(sc.nextLine());
-        System.out.print("Ingrese mensaje de sugerencia: ");
-        String mensaje = sc.nextLine();
-        Sugerencia sugerencia = new Sugerencia(id, cocinero, mensaje);
-        System.out.println("Sugerencia enviada.");
-        System.out.println(sugerencia.toLineaTxt());
-    }
-
-    private void realizarVentaCocinero(Cocinero cocinero) {
-        System.out.println("\n--- REALIZAR VENTA ---");
-        System.out.print("Ingrese ID venta: ");
-        int id = Integer.parseInt(sc.nextLine());
-        System.out.print("Ingrese fecha: ");
-        String fecha = sc.nextLine();
-        Venta venta = new Venta(id, fecha, false);
-        int opcion = -1;
-        while(opcion != 0) {
-            System.out.println("\n1. Agregar producto");
-            System.out.println("2. Aplicar propina");
-            System.out.println("3. Calcular subtotal");
-            System.out.println("0. Finalizar venta");
-            opcion = Integer.parseInt(sc.nextLine());
-            switch(opcion) {
-                case 1:
-                    Producto producto = null;
-                    venta.agregarProducto(producto);
-                    System.out.println("Producto agregado.");
-                    break;
-                case 2:
-                    venta.aplicarPropina();
-                    System.out.println("Propina aplicada.");
-                    break;
-                case 3:
-                    venta.calcularPrecio();
-                    System.out.println("Subtotal actual: " + venta.getSubtotal());
-                    break;
-                case 0:
-                    break;
-                default:
-                    System.out.println("Opción inválida.");
-            }
-        }
-        System.out.println("Venta finalizada.");
-        System.out.println(venta.toLineaTxt());
-    }
-    
     
     private void mostrarCliente(Cliente u) {
-        int opcion = -1;
-        while(opcion != 0) {
-            System.out.println("\n--- MENU CLIENTE ---");
-            System.out.println("1. Realizar reserva");
-            System.out.println("2. Solicitar préstamo");
-            System.out.println("3. Realizar compra");
-            System.out.println("0. Cerrar sesión");
-            try {
-                opcion = Integer.parseInt(sc.nextLine());
-                switch(opcion) {
-                    case 1:
-                        realizarReserva(u);
-                        break;
-                    case 2:
-                        realizarPrestamo(u);
-                        break;
-                    case 3:
-                        realizarVenta(u);
-                        break;
-                    case 0:
-                        System.out.println("Sesión cerrada.");
-                        break;
-                    default:
-                        System.out.println("Opción inválida.");
-                }
-            } catch(Exception e) {
-                System.out.println("Error en entrada.");
-            }
-        }
+    	int opcion = 0;
+    	do {
+    		System.out.println("\n--- PANEL CLIENTE ---");
+    		System.out.println("1. Realizar reserva");
+    		System.out.println("2. Solicitar préstamo");
+    		System.out.println("3. Realizar compra");
+    		System.out.println("4. Ver puntos de fidelidad");
+    		System.out.println("5. Cerrar sesión");
+    		System.out.print("Seleccione una opción: ");
+    		try {
+    			opcion = Integer.parseInt(sc.nextLine());
+    			switch(opcion) {
+    			case 1:
+    				System.out.println("\n--- NUEVA RESERVA ---");
+    				System.out.print("ID reserva: ");
+    				int idReserva = Integer.parseInt(sc.nextLine());
+    				System.out.print("Cantidad personas: ");
+    				int personas = Integer.parseInt(sc.nextLine());
+    				System.out.print("¿Hay menores de 5 años? (true/false): ");
+    				boolean menores = Boolean.parseBoolean(sc.nextLine());
+    				System.out.print("¿Hay jóvenes? (true/false): ");
+    				boolean jovenes = Boolean.parseBoolean(sc.nextLine());
+    				System.out.print("Tiempo de estadía: ");
+    				String estadia = sc.nextLine();
+    				Mesa mesaReserva = new Mesa(idReserva, personas, false);
+    				Reserva reserva = new Reserva(idReserva, u, mesaReserva, personas, menores, jovenes, estadia);
+    				System.out.println("Reserva creada exitosamente.");
+    				break;
+    			case 2:
+    				System.out.println("\n--- NUEVO PRÉSTAMO ---");
+    				System.out.print("ID préstamo: ");
+    				int idPrestamo = Integer.parseInt(sc.nextLine());
+    				System.out.print("Cantidad personas en mesa: ");
+    				int capacidadMesa = Integer.parseInt(sc.nextLine());
+    				Mesa mesaPrestamo = new Mesa(idPrestamo, capacidadMesa, false);
+    				Prestamo prestamo = new Prestamo(idPrestamo, mesaPrestamo, false, u);
+    				String continuarPrestamo = "s";
+    				while(continuarPrestamo.equalsIgnoreCase("s")) {
+    					System.out.print("Ingrese ID del juego: ");
+    					int idJuego = Integer.parseInt(sc.nextLine());
+    					Producto producto =	gestorI.buscarProductoPorId(idJuego);
+    					if(producto instanceof JuegoDeMesa) {
+    						JuegoDeMesa juego = (JuegoDeMesa) producto;
+    						prestamo.agregarJuego(juego);
+    						System.out.println("Juego agregado: " + juego.getNombre());
+    					} else {
+    						System.out.println("El ID no pertenece a un juego." );
+    					}
+    					System.out.print("¿Agregar otro juego? (s/n): ");
+    					continuarPrestamo = sc.nextLine();
+    				}
+    				System.out.println("Préstamo creado.");
+    				break;
+    			case 3:
+    				System.out.println("\n--- NUEVA COMPRA ---");
+    				System.out.print("ID venta: ");
+    				int idVenta = Integer.parseInt(sc.nextLine());
+    				System.out.print("Fecha: ");
+    				String fecha = sc.nextLine();
+    				Venta venta = new Venta(idVenta, fecha, false);
+    				String continuarCompra = "s";
+    				while(continuarCompra.equalsIgnoreCase("s")) {
+    					System.out.print("Ingrese ID del producto: ");
+    					int idProducto = Integer.parseInt(sc.nextLine());
+    					Producto producto =	gestorI.buscarProductoPorId(idProducto);
+    					if(producto != null) {
+    						venta.agregarProducto(producto);
+    						System.out.println("Producto agregado: "+ producto.getNombre());
+    						System.out.println("Precio: " + producto.calcularPrecioFinal());
+    					} else {
+    						System.out.println("Producto no encontrado.");
+    					}
+    					System.out.print("¿Agregar otro producto? (s/n): ");
+    					continuarCompra = sc.nextLine();
+    				}
+    				venta.calcularPrecio();
+    				System.out.println("Subtotal actual: " + venta.getSubtotal());
+    				System.out.print("¿Desea agregar propina? (s/n): ");
+    				String respuestaPropina = sc.nextLine();
+    				if(respuestaPropina.equalsIgnoreCase("s")) {
+    					venta.aplicarPropina();
+    					System.out.println("Total con propina: " + venta.getSubtotal());
+    				}
+    				int puntosGanados =(int) venta.getSubtotal() / 1000;
+    				u.actualizarPuntos(puntosGanados);
+    				System.out.println("Puntos ganados: " + puntosGanados);
+    				System.out.println("Puntos actuales: " + u.getPuntosFidelidad());
+    				System.out.println("Compra finalizada.");
+    				break;
+    			case 4:
+    				System.out.println("\nPuntos actuales: " + u.getPuntosFidelidad());
+    				break;
+    			case 5:
+    				System.out.println("Sesión cerrada.");
+    				break;
+    			default:
+    				System.out.println("Opción inválida.");
+    			}
+    		} catch(Exception e) {
+    			System.out.println("Error en la operación.");
+    		}
+    	} while(opcion != 5);
     }
     
-    private void realizarReserva(Cliente cliente) {
-        System.out.println("\n--- REALIZAR RESERVA ---");
-        System.out.print("Ingrese ID reserva: ");
-        int id = Integer.parseInt(sc.nextLine());
-        System.out.print("Cantidad de personas: ");
-        int personas = Integer.parseInt(sc.nextLine());
-        System.out.print("¿Hay menores de 5 años? (true/false): ");
-        boolean menores = Boolean.parseBoolean(sc.nextLine());
-        System.out.print("¿Hay jóvenes? (true/false): ");
-        boolean jovenes = Boolean.parseBoolean(sc.nextLine());
-        System.out.print("Tiempo estimado de estadía: ");
-        String estadia = sc.nextLine();
-        Mesa mesa = null;
-        Reserva reserva = new Reserva(id, cliente, mesa, personas, menores, jovenes, estadia);
-        System.out.println("Reserva creada correctamente.");
-        System.out.println(reserva.toLineaTxt());
-    }
-    
-    private void realizarPrestamo(Cliente cliente) {
-        System.out.println("\n--- REALIZAR PRESTAMO ---");
-        System.out.print("Ingrese ID préstamo: ");
-        int id = Integer.parseInt(sc.nextLine());
-        Mesa mesa = null;
-        Prestamo prestamo = new Prestamo(id, mesa, false, cliente);
-        int opcion = -1;
-        while(opcion != 0) {
-            System.out.println("\n1. Agregar juego");
-            System.out.println("0. Finalizar préstamo");
-            opcion = Integer.parseInt(sc.nextLine());
-            switch(opcion) {
-                case 1:
-                    JuegoDeMesa juego = null;
-                    prestamo.agregarJuego(juego);
-                    System.out.println("Juego agregado al préstamo.");
-                    break;
-                case 0:
-                    break;
-                default:
-                    System.out.println("Opción inválida.");
-            }
-        }
-        System.out.println("Préstamo realizado.");
-        System.out.println(prestamo.toLineaTxt());
-    }
-    
-    private void realizarVenta(Cliente cliente) {
-        System.out.println("\n--- REALIZAR VENTA ---");
-        System.out.print("Ingrese ID venta: ");
-        int id = Integer.parseInt(sc.nextLine());
-        System.out.print("Ingrese fecha: ");
-        String fecha = sc.nextLine();
-        Venta venta = new Venta(id, fecha, false);
-        int opcion = -1;
-        while(opcion != 0) {
-            System.out.println("\n1. Agregar producto");
-            System.out.println("2. Aplicar propina");
-            System.out.println("3. Calcular subtotal");
-            System.out.println("0. Finalizar venta");
-            opcion = Integer.parseInt(sc.nextLine());
-            switch(opcion) {
-                case 1:
-                    Producto producto = null;
-                    venta.agregarProducto(producto);
-                    System.out.println("Producto agregado.");
-                    break;
-                case 2:
-                    venta.aplicarPropina();
-                    System.out.println("Propina aplicada.");
-                    break;
-                case 3:
-                    venta.calcularPrecio();
-                    System.out.println("Subtotal actual: " + venta.getSubtotal());
-                    break;
-                case 0:
-                    break;
-                default:
-                    System.out.println("Opción inválida.");
-            }
-        }
-        System.out.println("Venta finalizada.");
-        System.out.println(venta.toLineaTxt());
-    }
-
-	private void mostrarMesero(Mesero u) {
+    private void mostrarMesero(Mesero u) {
 		int opcion = 0;
 		
 		do {
