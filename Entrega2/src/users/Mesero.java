@@ -40,7 +40,7 @@ public class Mesero extends Empleado
 	public String toLineaTxt() 
 	{
 		
-		return String.format("$s,%d,%s,%s,%s,%s,%s,%b",
+		return String.format("%s,%d,%s,%s,%s,%s,%s,%b",
 				rol,
 				id,
 				nombre,

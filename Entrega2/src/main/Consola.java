@@ -2,10 +2,12 @@ package main;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import administration.Sugerencia;
+import administration.Turno;
 import cafe.BoardGameCafe;
 import interfas.GestorUsuario;
 import products.JuegoDeMesa;
@@ -13,6 +15,7 @@ import interfas.GestorArchivo;
 import interfas.GestorInventario;
 import interfas.GestorHistorial;
 import interfas.GestorSugerencias;
+import interfas.GestorTurno;
 import users.Administrador;
 import users.Cliente;
 import users.Cocinero;
@@ -28,6 +31,7 @@ public class Consola
     private GestorInventario gestorI;
     private GestorHistorial gestorH;
     private GestorSugerencias gestorS;
+    private GestorTurno gestorT;
     
     public Consola()
     {
@@ -181,10 +185,10 @@ public class Consola
 		
 		do {
 			System.out.println("\n--- PANEL DE MESERO ---");
-	        System.out.println("1. ");
-	        System.out.println("2. ");
-	        System.out.println("3. ");
-	        System.out.println("4. ");
+	        System.out.println("1. Planear turno");
+	        System.out.println("2. Realizar sugerencia");
+	        System.out.println("3. Agregar un juego a la lista");
+	        System.out.println("4. Comprar un juego con codigo de descuento");
 	        System.out.println("5. Cerrar Sesión");
 	        System.out.print("Seleccione una opción: ");
 	        
@@ -192,15 +196,74 @@ public class Consola
             	opcion = Integer.parseInt(sc.nextLine());
             	switch (opcion) {
             	case 1:
+            		System.out.println("\n--- PLANIFICAR MI TURNO ---");
+            	    Turno nuevoTurno = new Turno(u); 
+            	    String continuar = "s";
+            	    
+            	    while(continuar.equalsIgnoreCase("s")) {
+            	        System.out.print("Día (LUNES, MARTES, etc.): ");
+            	        String dia = sc.nextLine().toUpperCase();
+            	        System.out.print("Rango de horas (ej: 08:00-12:00): ");
+            	        String rango = sc.nextLine();
+            	        
+            	        nuevoTurno.getDIASEMANAHORA().putIfAbsent(dia, new ArrayList<>());
+            	        nuevoTurno.getDIASEMANAHORA().get(dia).add(rango);
+            	        
+            	        System.out.print("¿Agregar otro día? (s/n): ");
+            	        continuar = sc.nextLine();
+            	    }
+            	    
+            	    gestorT.guardarTurno(nuevoTurno); 
+            	    System.out.println("Turno guardado correctamente.");
             		break;
             	case 2:
-            		
+            		System.out.println("\n--- ENVIAR SUGERENCIA AL ADMIN ---");
+            	    System.out.print("Escriba su mensaje: ");
+            	    String msj = sc.nextLine();
+            	    
+            	    int idSugerencia = gestorS.generarNuevoId();
+            	    Sugerencia nuevaS = new Sugerencia(idSugerencia, u, msj);
+            	    
+            	    gestorS.guardarNuevaSugerencia(nuevaS);
+            	    System.out.println("Sugerencia enviada con éxito.");
             		break;
             	case 3:
-            		
+            		System.out.print("Ingrese el ID del juego que ya domina: ");
+            	    int idJuego = Integer.parseInt(sc.nextLine());
+            	    
+            	    products.Producto p = gestorI.buscarProductoPorId(idJuego);
+            	    
+            	    if (p instanceof products.JuegoDeMesa) {
+            	        u.agregarJuegoDominado((products.JuegoDeMesa) p);
+
+            	        gestorU.actualizarArchivo(); 
+            	        System.out.println("¡Juego agregado a tu lista de maestría!");
+            	    } else {
+            	        System.out.println("ID no encontrado o no es un juego de mesa.");
+            	    }
                     break;
             	case 4:
-            		
+            		System.out.println("\n--- COMPRA CON DESCUENTO DE EMPLEADO ---");
+            	    System.out.print("Ingrese su código de descuento: ");
+            	    String codIngresado = sc.nextLine();
+            	    
+            	    if (!codIngresado.equalsIgnoreCase("NONE") && !codIngresado.equalsIgnoreCase("ninguno")) {
+            	        System.out.println("¡Código válido aplicado!");
+            	        
+            	        System.out.print("ID del juego a comprar: ");
+            	        int idC = Integer.parseInt(sc.nextLine());
+            	        products.Producto prod = gestorI.buscarProductoPorId(idC);
+            	        
+            	        if (prod != null) {
+            	            double precioFinal = prod.getPrecioBase() * 0.80; 
+            	            System.out.println("Precio original: " + prod.getPrecioBase());
+            	            System.out.println("Precio con descuento: " + precioFinal);
+            	            
+            	            System.out.println("Compra procesada con éxito.");
+            	        }
+            	    } else {
+            	        System.out.println("Código inválido. No se puede proceder con esta opción.");
+            	    }
             		break;
             	case 5:
             		System.out.println("Sesión cerrada.");

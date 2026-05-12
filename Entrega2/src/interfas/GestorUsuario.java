@@ -2,7 +2,9 @@ package interfas;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import users.Administrador;
 import users.Cliente;
@@ -137,5 +139,19 @@ public class GestorUsuario
 	        }
 	    }
 	    return null; 
+	}
+	
+	public void actualizarArchivo() {
+	    String ruta = "archivosTxt/usuarios.txt";
+	    
+	    try (PrintWriter pw = new PrintWriter(new FileWriter(ruta))) {
+	        
+	        for (Usuario u : mapaUsuarios.values()) {
+	            pw.println(u.toLineaTxt());
+	        }
+	        
+	    } catch (IOException e) {
+	        System.err.println("Error al actualizar el archivo de usuarios: " + e.getMessage());
+	    }
 	}
 }
