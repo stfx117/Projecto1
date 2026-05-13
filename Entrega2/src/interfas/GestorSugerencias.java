@@ -14,9 +14,10 @@ public class GestorSugerencias {
     private static final String ARCHIVO = "archivosTxt/sugerencias.txt";
     private GestorArchivo gestorA;
 
-    public GestorSugerencias(GestorUsuario gestorU) {
+    public GestorSugerencias(GestorUsuario gestorU, GestorArchivo gestorA) {
         this.sugerencias = new ArrayList<>();
         this.gestorU = gestorU;
+        this.gestorA = gestorA;
         cargarSugerencias();
     }
 

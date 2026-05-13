@@ -46,7 +46,7 @@ public class Consola
     	this.gestorA = new GestorArchivo();
     	this.gestorI = new GestorInventario();
     	this.gestorH = new GestorHistorial(gestorI);
-    	this.gestorS = new GestorSugerencias(gestorU);
+    	this.gestorS = new GestorSugerencias(gestorU, gestorA);
     	this.gestorT = new GestorTurno(gestorU);
     }
     
