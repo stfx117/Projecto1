@@ -45,6 +45,4 @@ public class Mesa implements GuardadoTxt{
 				capacidadMaxima,
 				estaOcupada);
 	}
-	
-	
 }
