@@ -5,7 +5,7 @@ import javax.swing.*;
 import services.Mesa;
 import services.Reserva;
 import users.Cliente;
-import interfas.GestorReserva;
+import interfas.GestorReservaALternativo;
 
 import java.awt.*;
 import java.time.LocalDate;
@@ -19,9 +19,9 @@ public class PanelReservaCliente extends JPanel {
     private JTextField txtEstadia;
     private JButton btnRegistrar;
     private Cliente cliente;
-    private GestorReserva gestorR;
+    private GestorReservaALternativo gestorR;
     
-    public PanelReservaCliente(Cliente u, GestorReserva gestorR) {
+    public PanelReservaCliente(Cliente u, GestorReservaALternativo gestorR) {
         
     	cliente = u;
     	this.gestorR = gestorR;  

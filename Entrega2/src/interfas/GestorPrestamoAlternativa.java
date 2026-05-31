@@ -12,12 +12,12 @@ import services.Mesa;
 import services.Prestamo;
 import users.Cliente;
 
-public class GestorPrestamo {
+public class GestorPrestamoAlternativa {
     private HashMap<Integer, Prestamo> mapaPrestamos;
     private GestorUsuario gestorU;
     private GestorInventario gestorI;
 
-    public GestorPrestamo() {
+    public GestorPrestamoAlternativa() {
         this.mapaPrestamos = new HashMap<>();
         this.gestorU = new GestorUsuario();
         this.gestorI = new GestorInventario();

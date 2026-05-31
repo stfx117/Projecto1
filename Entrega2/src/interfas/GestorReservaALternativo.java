@@ -10,12 +10,12 @@ import java.util.HashMap;
 import services.Mesa;
 import services.Reserva;
 
-public class GestorReserva {
+public class GestorReservaALternativo {
 
     private HashMap<Integer, Reserva> mapaReservas;
     private GestorUsuario gestorU;
 
-    public GestorReserva() {
+    public GestorReservaALternativo() {
         this.mapaReservas = new HashMap<>();
         this.gestorU = new GestorUsuario();
         cargarReservasDesdeArchivo();
@@ -91,8 +91,7 @@ public class GestorReserva {
                 pw.println(r.toLineaTxt());
             }
         } catch (IOException e) {
-            System.err.println("Error al actualizar archivo reservas: "
-                    + e.getMessage());
+            System.err.println("Error al actualizar archivo reservas: " + e.getMessage());
         }
     }
 }

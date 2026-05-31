@@ -3,7 +3,7 @@ package interfazGrafica;
 import javax.swing.*;
 
 import interfas.GestorInventario;
-import interfas.GestorPrestamo;
+import interfas.GestorPrestamoAlternativa;
 
 import java.awt.*;
 import java.time.LocalDate;
@@ -18,7 +18,7 @@ import users.Cliente;
 
 public class PanelPrestamoCliente extends JPanel {
 
-    private GestorPrestamo gestorP;   
+    private GestorPrestamoAlternativa gestorP;   
     private GestorInventario gestorI; 
     private Cliente cliente;    
 
@@ -26,7 +26,7 @@ public class PanelPrestamoCliente extends JPanel {
     private JTextField txtIdJuego;
     private JButton btnRegistrarPrestamo;
 
-    public PanelPrestamoCliente(Cliente cliente, GestorPrestamo gestorP, GestorInventario gestorI  ) {
+    public PanelPrestamoCliente(Cliente cliente, GestorPrestamoAlternativa gestorP, GestorInventario gestorI  ) {
         this.gestorP = gestorP;
         this.gestorI = gestorI;
         this.cliente = cliente;

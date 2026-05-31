@@ -5,8 +5,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import interfas.GestorInventario;
-import interfas.GestorPrestamo;
-import interfas.GestorReserva;
+import interfas.GestorPrestamoAlternativa;
+import interfas.GestorReservaALternativo;
 import interfas.GestorVenta;
 import users.Cliente;
 
@@ -18,7 +18,7 @@ public class InterfazCliente extends JFrame {
     private CardLayout cardLayout;
     private JList<String> listaMenu;
 
-    public InterfazCliente(Cliente u, GestorReserva gestorR, GestorPrestamo gestorP, GestorInventario gestorI, GestorVenta gestorV) {
+    public InterfazCliente(Cliente u, GestorReservaALternativo gestorR, GestorPrestamoAlternativa gestorP, GestorInventario gestorI, GestorVenta gestorV) {
         setTitle("Panel de Control - Cliente");
         setSize(800, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
