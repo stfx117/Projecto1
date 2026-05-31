@@ -1,2 +1,6 @@
 TURNO,2,LUNES:08;MIERCOLES:14
+<<<<<<< HEAD
 TURNO,3,MARTES:08:00-13:00
+=======
+TURNO,3,MIERCOLES:8:00-4:00
+>>>>>>> refs/heads/Est-1
