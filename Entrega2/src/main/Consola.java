@@ -50,6 +50,22 @@ public class Consola
     	this.gestorT = new GestorTurno(gestorU);
     }
     
+    public GestorInventario getGestorI() {
+        return this.gestorI;
+    }
+
+    public GestorSugerencias getGestorS() {
+        return this.gestorS;
+    }
+    
+    public GestorHistorial getGestorH() {
+		return this.gestorH;
+	}
+    
+    public GestorTurno getGestorT() {
+    	return this.gestorT;
+    }
+    
     public void iniciar() {
         int opcion = 0;
         do{

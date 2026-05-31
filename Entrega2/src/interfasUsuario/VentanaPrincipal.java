@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import interfas.GestorUsuario;
+import interfas.GestorHistorial;
 import main.Consola;
 import users.Usuario;
 import users.Cliente; 
@@ -14,14 +15,12 @@ public class VentanaPrincipal extends JFrame {
     private JTextField txtLoginUsuario;
     private JPasswordField txtLoginPassword;
     private JButton btnIngresar;
-    
     private JTextField txtRegNombre;
     private JTextField txtRegEmail;
     private JTextField txtRegLogin;
     private JPasswordField txtRegPassword;
     private JTextField txtRegFechaNac;
     private JButton btnRegistrar;
-    
     private GestorUsuario gestorU;
     private Consola consolaBase;
 
@@ -48,93 +47,56 @@ public class VentanaPrincipal extends JFrame {
     }
 
     private JPanel crearPanelLogin() {
-        JPanel panel = new JPanel(new GridBagLayout());
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+    	JPanel formulario = new JPanel(new GridLayout(3, 2, 10, 10));
 
-        // Usuario
-        gbc.gridx = 0; gbc.gridy = 0;
-        panel.add(new JLabel("Usuario (Login):"), gbc);
         txtLoginUsuario = new JTextField(15);
-        gbc.gridx = 1;
-        panel.add(txtLoginUsuario, gbc);
-
-        // Contraseña
-        gbc.gridx = 0; gbc.gridy = 1;
-        panel.add(new JLabel("Contraseña:"), gbc);
         txtLoginPassword = new JPasswordField(15);
-        gbc.gridx = 1;
-        panel.add(txtLoginPassword, gbc);
-
-        // Botón Ingresar
         btnIngresar = new JButton("Ingresar al Sistema");
-        gbc.gridx = 0; gbc.gridy = 2;
-        gbc.gridwidth = 2;
-        panel.add(btnIngresar, gbc);
 
-        // Evento de Login
-        btnIngresar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                procesarLogin();
-            }
-        });
+        formulario.add(new JLabel("Usuario (Login):")); 
+        formulario.add(txtLoginUsuario);
+        
+        formulario.add(new JLabel("Contraseña:"));      
+        formulario.add(txtLoginPassword);
+        
+        formulario.add(new JLabel(""));                 
+        formulario.add(btnIngresar);
 
-        return panel;
+        btnIngresar.addActionListener(e -> procesarLogin());
+
+
+        JPanel contenedorPrincipal = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 50));
+        contenedorPrincipal.add(formulario); 
+
+        return contenedorPrincipal;
     }
 
     private JPanel crearPanelRegistro() {
-        JPanel panel = new JPanel(new GridBagLayout());
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+    	JPanel panel = new JPanel(new GridLayout(6, 2, 8, 8));
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
 
-        // Nombre
-        gbc.gridx = 0; gbc.gridy = 0;
-        panel.add(new JLabel("Nombre Completo:"), gbc);
         txtRegNombre = new JTextField(15);
-        gbc.gridx = 1; panel.add(txtRegNombre, gbc);
-
-        // Email
-        gbc.gridx = 0; gbc.gridy = 1;
-        panel.add(new JLabel("Email:"), gbc);
         txtRegEmail = new JTextField(15);
-        gbc.gridx = 1; panel.add(txtRegEmail, gbc);
-
-        // Login 
-        gbc.gridx = 0; gbc.gridy = 2;
-        panel.add(new JLabel("Nombre de Usuario (Login):"), gbc);
         txtRegLogin = new JTextField(15);
-        gbc.gridx = 1; panel.add(txtRegLogin, gbc);
-
-        // Contraseña
-        gbc.gridx = 0; gbc.gridy = 3;
-        panel.add(new JLabel("Contraseña:"), gbc);
         txtRegPassword = new JPasswordField(15);
-        gbc.gridx = 1; panel.add(txtRegPassword, gbc);
-
-        // Fecha de Nacimiento
-        gbc.gridx = 0; gbc.gridy = 4;
-        panel.add(new JLabel("F. Nacimiento (AAAA-MM-DD):"), gbc);
         txtRegFechaNac = new JTextField(15);
-        gbc.gridx = 1; panel.add(txtRegFechaNac, gbc);
-
-        // Botón Registrar
         btnRegistrar = new JButton("Crear Cuenta de Cliente");
-        gbc.gridx = 0; gbc.gridy = 5;
-        gbc.gridwidth = 2;
-        panel.add(btnRegistrar, gbc);
 
-        // Evento de Registro
-        btnRegistrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                procesarRegistro();
-            }
-        });
+        panel.add(new JLabel("Nombre Completo:"));           
+        panel.add(txtRegNombre);
+        panel.add(new JLabel("Email:"));                     
+        panel.add(txtRegEmail);
+        panel.add(new JLabel("Nombre de Usuario (Login):")); 
+        panel.add(txtRegLogin);
+        panel.add(new JLabel("Contraseña:"));               
+        panel.add(txtRegPassword);
+        panel.add(new JLabel("F. Nacimiento (AAAA-MM-DD):")); 
+        panel.add(txtRegFechaNac);
+        
+        panel.add(new JLabel(""));                           
+        panel.add(btnRegistrar);
+
+        btnRegistrar.addActionListener(e -> procesarRegistro());
 
         return panel;
     }
@@ -194,6 +156,46 @@ public class VentanaPrincipal extends JFrame {
     }
 
     private void abrirPantallaPorRol(Usuario u) {
-        System.out.println("Abriendo panel para el rol: " + u.getRol());
+    	String rol = u.getRol().toString().toUpperCase(); 
+        
+        switch (rol) {
+            case "ADMIN":
+            case "ADMINISTRADOR":
+      
+            	VentanaAdministrador vAdmin = new VentanaAdministrador(
+            		    u, 
+            		    consolaBase.getGestorI(), 
+            		    this.gestorU, 
+            		    consolaBase.getGestorS(), 
+            		    consolaBase.getGestorH(), 
+            		    this 
+            		);
+            		vAdmin.setVisible(true); 
+                break;
+                
+            case "COCINERO":
+                
+                break;
+                
+            case "MESERO":
+            	VentanaMesero vMesero = new VentanaMesero(
+            	        u, 
+            	        consolaBase.getGestorT(), 
+            	        consolaBase.getGestorS(), 
+            	        consolaBase.getGestorI(), 
+            	        this.gestorU,             
+            	        this                      
+            	    );
+            	    vMesero.setVisible(true);
+                break;
+                
+            case "CLIENTE":
+                
+                break;
+                
+            default:
+                JOptionPane.showMessageDialog(this, "El rol '" + rol + "' no tiene una interfaz asignada.", "Error", JOptionPane.ERROR_MESSAGE);
+                break;
+        }
     }
 }

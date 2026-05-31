@@ -1,4 +1,4 @@
-1,2,Falta stock de dados de 6 caras,true
+2,2,Falta stock de dados de 6 caras,true
 2,2,El horno de reposteria necesita mantenimiento,true
-3,3,se acabo el pan xd,false
-4,2,suban el sueldo,false
+3,3,se acabo el pan xd,true
+2,2,suban el sueldo,true
