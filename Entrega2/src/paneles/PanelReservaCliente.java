@@ -5,6 +5,7 @@ import javax.swing.*;
 import services.Mesa;
 import services.Reserva;
 import users.Cliente;
+import users.Usuario;
 import interfas.GestorReserva;
 
 import java.awt.*;
@@ -18,10 +19,10 @@ public class PanelReservaCliente extends JPanel {
     private JCheckBox chkJovenes;
     private JTextField txtEstadia;
     private JButton btnRegistrar;
-    private Cliente cliente;
+    private Usuario cliente;
     private GestorReserva gestorR;
     
-    public PanelReservaCliente(Cliente u, GestorReserva gestorR) {
+    public PanelReservaCliente(Usuario u, GestorReserva gestorR) {
         
     	cliente = u;
     	this.gestorR = gestorR;  

@@ -10,6 +10,7 @@ import administration.Sugerencia;
 import administration.Turno;
 import cafe.BoardGameCafe;
 import interfas.GestorUsuario;
+import interfas.GestorVenta;
 import products.JuegoDeMesa;
 import products.Producto;
 import sales.Venta;
@@ -18,6 +19,9 @@ import services.Prestamo;
 import services.Reserva;
 import interfas.GestorArchivo;
 import interfas.GestorInventario;
+import interfas.GestorMesas;
+import interfas.GestorPrestamo;
+import interfas.GestorReserva;
 import interfas.GestorHistorial;
 import interfas.GestorSugerencias;
 import interfas.GestorTurno;
@@ -37,6 +41,10 @@ public class Consola
     private GestorHistorial gestorH;
     private GestorSugerencias gestorS;
     private GestorTurno gestorT;
+    private GestorReserva gestorR;
+    private GestorMesas gestorM;
+    private GestorPrestamo gestorP;
+    private GestorVenta gestorV;
     
     public Consola()
     {
@@ -47,6 +55,12 @@ public class Consola
     	this.gestorH = new GestorHistorial(gestorI);
     	this.gestorS = new GestorSugerencias(gestorU, gestorA);
     	this.gestorT = new GestorTurno(gestorU);
+    	this.gestorM = new GestorMesas(gestorA);
+    	this.gestorR = new GestorReserva(gestorU, gestorM, gestorA);
+    	this.gestorP = new GestorPrestamo(gestorU, gestorM, gestorI, gestorA);
+    	this.gestorV = new GestorVenta(gestorI, gestorA);
+    	
+    	
     }
     
     public GestorInventario getGestorI() {
@@ -63,6 +77,22 @@ public class Consola
     
     public GestorTurno getGestorT() {
     	return this.gestorT;
+    }
+    
+    public GestorMesas getGestorM() {
+    	return this.gestorM;
+    }
+    
+    public GestorReserva getGestorR() {
+    	return this.gestorR;
+    }
+    
+    public GestorPrestamo getGestorP() {
+    	return this.gestorP;
+    }
+    
+    public GestorVenta getGestorV() {
+    	return this.gestorV;
     }
     
     public void iniciar() {

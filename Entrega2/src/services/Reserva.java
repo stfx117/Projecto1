@@ -1,6 +1,7 @@
 package services;
 
 import users.Cliente;
+import users.Usuario;
 import interfas.GuardadoTxt;
 import products.JuegoDeMesa;
 
@@ -8,7 +9,7 @@ public class Reserva implements GuardadoTxt
 {
 	//Atributos
 	private int id;
-	private Cliente cliente;
+	private Usuario cliente;
 	private Mesa mesa;
 	private int personas;
 	private boolean menores5Anios;
@@ -16,10 +17,10 @@ public class Reserva implements GuardadoTxt
 	private String estadia;
 	
 	//Constructor
-	public Reserva(int id, Cliente cliente, Mesa mesa, int personas, boolean menores5Anios, boolean hayJovenes, String estadia)
+	public Reserva(int id, Usuario cliente2, Mesa mesa, int personas, boolean menores5Anios, boolean hayJovenes, String estadia)
 	{
 		this.id = id;
-		this.cliente = cliente;
+		this.cliente = cliente2;
 		this.mesa = mesa;
 		this.personas = personas;
 		this.menores5Anios = menores5Anios;
@@ -36,7 +37,7 @@ public class Reserva implements GuardadoTxt
 		this.id = id;
 	}
 
-	public Cliente getCliente() {
+	public Usuario getCliente() {
 		return cliente;
 	}
 

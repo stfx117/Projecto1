@@ -14,21 +14,22 @@ import services.Prestamo;
 import products.Producto;
 import products.JuegoDeMesa;
 import users.Cliente;
+import users.Usuario;
 
 public class PanelPrestamoCliente extends JPanel {
 
     private GestorPrestamo gestorP;   
     private GestorInventario gestorI; 
-    private Cliente cliente;    
+    private Usuario cliente;    
 
     private JTextField txtCapacidadMesa;
     private JTextField txtIdJuego;
     private JButton btnRegistrarPrestamo;
 
-    public PanelPrestamoCliente(Cliente cliente, GestorPrestamo gestorP, GestorInventario gestorI  ) {
+    public PanelPrestamoCliente(Usuario u, GestorPrestamo gestorP, GestorInventario gestorI  ) {
         this.gestorP = gestorP;
         this.gestorI = gestorI;
-        this.cliente = cliente;
+        this.cliente = u;
 
         setBackground(Color.WHITE);
         setLayout(new GridBagLayout());

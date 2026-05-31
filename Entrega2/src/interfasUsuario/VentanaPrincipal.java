@@ -8,7 +8,8 @@ import interfas.GestorUsuario;
 import interfas.GestorHistorial;
 import main.Consola;
 import users.Usuario;
-import users.Cliente; 
+import users.Cliente;
+import users.Cocinero; 
 
 public class VentanaPrincipal extends JFrame {
     
@@ -174,7 +175,17 @@ public class VentanaPrincipal extends JFrame {
                 break;
                 
             case "COCINERO":
+                Cocinero cocineroActual = (Cocinero) u;
+                InterfazCocinero vCocinero = new InterfazCocinero(
+                    cocineroActual,
+                    consolaBase.getGestorI(), 
+                    consolaBase.getGestorV(), 
+                    consolaBase.getGestorT(), 
+                    consolaBase.getGestorS()  
+                );
                 
+
+                vCocinero.setVisible(true);
                 break;
                 
             case "MESERO":
@@ -190,7 +201,19 @@ public class VentanaPrincipal extends JFrame {
                 break;
                 
             case "CLIENTE":
+
+                Cliente clienteActual = (Cliente) u;
                 
+
+                InterfazCliente vCliente = new InterfazCliente(
+                    clienteActual,
+                    consolaBase.getGestorR(), // GestorReserva
+                    consolaBase.getGestorP(), // GestorPrestamo
+                    consolaBase.getGestorI(), // GestorInventario
+                    consolaBase.getGestorV()  // GestorVenta
+                );
+                
+                vCliente.setVisible(true);
                 break;
                 
             default:
