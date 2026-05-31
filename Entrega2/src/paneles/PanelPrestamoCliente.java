@@ -1,4 +1,4 @@
-package interfazGrafica;
+package paneles;
 
 import javax.swing.*;
 
@@ -9,7 +9,6 @@ import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-// Importa tus clases lógicas correspondientes
 import services.Mesa;
 import services.Prestamo;
 import products.Producto;

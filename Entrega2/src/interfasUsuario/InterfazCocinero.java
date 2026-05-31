@@ -1,4 +1,4 @@
-package interfazGrafica;
+package interfasUsuario;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -7,8 +7,10 @@ import javax.swing.event.ListSelectionListener;
 import interfas.GestorInventario;
 import interfas.GestorSugerencias;
 import interfas.GestorTurno;
-import interfas.GestorUsuario;
 import interfas.GestorVenta;
+import paneles.PanelCompraCocinero;
+import paneles.PanelSugerenciaCocinero;
+import paneles.PanelTurnoCocinero;
 
 import java.awt.*;
 import users.Cocinero;
@@ -48,7 +50,7 @@ public class InterfazCocinero extends JFrame {
         PanelSugerenciaCocinero panelSugerencia = new PanelSugerenciaCocinero(u, gestorS);
         PanelCompraCocinero panelCompra = new PanelCompraCocinero(u, gestorV, gestorI);
 
-        panelDerechoContenedor.add(crearPanelGenérico("Bienvenido Cocinero"), "Home");
+        panelDerechoContenedor.add(panelGenerico("Bienvenido Cocinero"), "Home");
         panelDerechoContenedor.add(panelTurno, "Planear Turno");
         panelDerechoContenedor.add(panelSugerencia, "Realizar Sugerencia");
         panelDerechoContenedor.add(panelCompra, "Comprar Producto");
@@ -68,26 +70,12 @@ public class InterfazCocinero extends JFrame {
         add(panelDerechoContenedor, BorderLayout.CENTER);
     }
 
-    private JPanel crearPanelGenérico(String texto) {
+    private JPanel panelGenerico(String texto) {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBackground(Color.WHITE);
         JLabel etiqueta = new JLabel(texto);
         etiqueta.setFont(new Font("Arial", Font.BOLD, 35));
         panel.add(etiqueta);
         return panel;
-    }
-
-    public static void main(String[] args) {
-        Cocinero cocineroPrueba = new Cocinero("COCINERO",3,"Chef Maria","maria@cafe.com","maria","c123","REPOSTERIA",false);
-        
-        GestorInventario gestorI = new GestorInventario();
-        GestorVenta gestorV = new GestorVenta();
-        GestorUsuario gestorU = new GestorUsuario();
-        GestorTurno gestorT = new GestorTurno(gestorU);
-        GestorSugerencias gestorS = new GestorSugerencias(gestorU);
-        
-
-        SwingUtilities.invokeLater(() -> {
-            new InterfazCocinero(cocineroPrueba, gestorI, gestorV, gestorT, gestorS).setVisible(true);});
     }
 }

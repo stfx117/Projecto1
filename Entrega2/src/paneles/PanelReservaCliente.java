@@ -1,4 +1,4 @@
-package interfazGrafica;
+package paneles;
 
 import javax.swing.*;
 
@@ -121,7 +121,7 @@ public class PanelReservaCliente extends JPanel {
             Mesa mesaReserva = new Mesa(id, personas, false);
 			Reserva reserva = new Reserva(id, this.cliente, mesaReserva, personas, menores, jovenes, estadia);
 			
-			this.gestorR.agregarReserva(reserva);
+			this.gestorR.registrarReserva(reserva);
             this.gestorR.actualizarArchivo();
 
             DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
