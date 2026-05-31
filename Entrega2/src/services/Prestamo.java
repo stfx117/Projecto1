@@ -7,20 +7,21 @@ import interfas.GuardadoTxt;
 import products.JuegoDeMesa;
 import users.Cliente;
 import users.Mesero;
+import users.Usuario;
 
 public class Prestamo implements GuardadoTxt{
 	private int id;
 	private ArrayList<JuegoDeMesa> juegos;
 	private Mesa mesaAsociada;
 	private boolean advertenciaSinMesero;
-	private Cliente clienteAsociado;
+	private Usuario clienteAsociado;
 	
-	public Prestamo(int id, Mesa mesaAsociada, boolean advertenciaSinMesero, Cliente clienteAsociado) {
+	public Prestamo(int id, Mesa mesaAsociada, boolean advertenciaSinMesero, Usuario usuario) {
 		this.id = id;
 		this.juegos = new ArrayList<JuegoDeMesa>();
 		this.mesaAsociada = mesaAsociada;
 		this.advertenciaSinMesero = advertenciaSinMesero;
-		this.clienteAsociado = clienteAsociado;
+		this.clienteAsociado = usuario;
 	}
 	
 	public void agregarJuego(JuegoDeMesa juego) {
@@ -88,7 +89,7 @@ public class Prestamo implements GuardadoTxt{
 		this.advertenciaSinMesero = x;
 	}
 	
-	public Cliente getClienteAsociado() {
+	public Usuario getClienteAsociado() {
 		return this.clienteAsociado;
 	}
 	
