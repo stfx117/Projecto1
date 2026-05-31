@@ -7,5 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/6"/>
+	<classpathentry kind="lib" path="C:/Andresito/DPOO/eclipse/libs/jfreechart-1.5.6/jfreechart-1.5.6-javadoc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
