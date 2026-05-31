@@ -1,4 +1,4 @@
-package interfazGrafica;
+package paneles;
 
 import javax.swing.*;
 import java.awt.*;

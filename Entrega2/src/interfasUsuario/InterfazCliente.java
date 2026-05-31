@@ -1,13 +1,17 @@
-package interfazGrafica;
+package interfasUsuario;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import interfas.GestorInventario;
-import interfas.GestorPrestamoAlternativa;
-import interfas.GestorReservaALternativo;
+import interfas.GestorPrestamo;
+import interfas.GestorReserva;
 import interfas.GestorVenta;
+import paneles.PanelCompraCliente;
+import paneles.PanelPrestamoCliente;
+import paneles.PanelPuntosCliente;
+import paneles.PanelReservaCliente;
 import users.Cliente;
 
 import java.awt.*;
@@ -18,7 +22,7 @@ public class InterfazCliente extends JFrame {
     private CardLayout cardLayout;
     private JList<String> listaMenu;
 
-    public InterfazCliente(Cliente u, GestorReservaALternativo gestorR, GestorPrestamoAlternativa gestorP, GestorInventario gestorI, GestorVenta gestorV) {
+    public InterfazCliente(Cliente u, GestorReserva gestorR, GestorPrestamo gestorP, GestorInventario gestorI, GestorVenta gestorV) {
         setTitle("Panel de Control - Cliente");
         setSize(800, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,13 +82,4 @@ public class InterfazCliente extends JFrame {
         panel.add(etiqueta);
         return panel;
     }
-
-    //public static void main(String[] args) {
-    	//Cliente cliente = new Cliente("CLIENTE",4,"Lucas Gomez","lucas@mail.com","lucas","l123","1995-05-10",0,"NINGUNO");
-    //	GestorReserva gestorR = new GestorReserva();
-    	//GestorPrestamo gestorP = new GestorPrestamo();
-    //	GestorInventario gestorI = new GestorInventario();
-    //	GestorVenta gestorV = new GestorVenta();
-    //    SwingUtilities.invokeLater(() -> new InterfazCliente(cliente, gestorR, gestorP, gestorI, gestorV).setVisible(true));
-    //}
 }

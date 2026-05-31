@@ -1,11 +1,11 @@
-package interfazGrafica;
+package paneles;
 
 import javax.swing.*;
 
 import services.Mesa;
 import services.Reserva;
 import users.Cliente;
-import interfas.GestorReservaALternativo;
+import interfas.GestorReserva;
 
 import java.awt.*;
 import java.time.LocalDate;
@@ -19,9 +19,9 @@ public class PanelReservaCliente extends JPanel {
     private JTextField txtEstadia;
     private JButton btnRegistrar;
     private Cliente cliente;
-    private GestorReservaALternativo gestorR;
+    private GestorReserva gestorR;
     
-    public PanelReservaCliente(Cliente u, GestorReservaALternativo gestorR) {
+    public PanelReservaCliente(Cliente u, GestorReserva gestorR) {
         
     	cliente = u;
     	this.gestorR = gestorR;  
@@ -121,7 +121,7 @@ public class PanelReservaCliente extends JPanel {
             Mesa mesaReserva = new Mesa(id, personas, false);
 			Reserva reserva = new Reserva(id, this.cliente, mesaReserva, personas, menores, jovenes, estadia);
 			
-			this.gestorR.agregarReserva(reserva);
+			this.gestorR.registrarReserva(reserva);
             this.gestorR.actualizarArchivo();
 
             DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");

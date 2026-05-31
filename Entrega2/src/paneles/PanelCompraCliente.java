@@ -1,15 +1,14 @@
-package interfazGrafica;
+package paneles;
 
 import javax.swing.*;
 
 import interfas.GestorInventario;
-import interfas.GestorVenta; // Asumiendo que tu gestor de ventas se llama así en ese paquete
+import interfas.GestorVenta; 
 
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-// Importa tus clases lógicas correspondientes
 import sales.Venta;
 import products.Producto;
 import users.Cliente;
@@ -103,7 +102,7 @@ public class PanelCompraCliente extends JPanel {
             int puntosGanados = (int) venta.getSubtotal() / 1000;
             this.cliente.actualizarPuntos(puntosGanados);
 
-            gestorV.agregarVenta(venta);
+            gestorV.registrarVenta(venta);
             gestorV.actualizarArchivo(); 
 
             JPanel panelTiquete = new JPanel(new BorderLayout(15, 15));

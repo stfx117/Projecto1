@@ -1,4 +1,4 @@
-package interfazGrafica;
+package paneles;
 
 import javax.swing.*;
 import java.awt.*;
@@ -109,7 +109,7 @@ public class PanelCompraCocinero extends JPanel {
 
             venta.setSubtotal(totalConDescuento);
 
-            gestorV.agregarVenta(venta);
+            gestorV.registrarVenta(venta);
             gestorV.actualizarArchivo();
 
 

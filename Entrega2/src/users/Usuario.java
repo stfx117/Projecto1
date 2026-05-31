@@ -30,6 +30,11 @@ public abstract class Usuario implements GuardadoTxt
 	}
 	
 	//Metodos
+	public String getRol()
+	{
+		return this.rol;
+	}
+	
 	public int getId() 
 	{
 	    return id;

@@ -1,15 +1,14 @@
-package interfazGrafica;
+package paneles;
 
 import javax.swing.*;
 
 import interfas.GestorInventario;
-import interfas.GestorPrestamoAlternativa;
+import interfas.GestorPrestamo;
 
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-// Importa tus clases lógicas correspondientes
 import services.Mesa;
 import services.Prestamo;
 import products.Producto;
@@ -18,7 +17,7 @@ import users.Cliente;
 
 public class PanelPrestamoCliente extends JPanel {
 
-    private GestorPrestamoAlternativa gestorP;   
+    private GestorPrestamo gestorP;   
     private GestorInventario gestorI; 
     private Cliente cliente;    
 
@@ -26,7 +25,7 @@ public class PanelPrestamoCliente extends JPanel {
     private JTextField txtIdJuego;
     private JButton btnRegistrarPrestamo;
 
-    public PanelPrestamoCliente(Cliente cliente, GestorPrestamoAlternativa gestorP, GestorInventario gestorI  ) {
+    public PanelPrestamoCliente(Cliente cliente, GestorPrestamo gestorP, GestorInventario gestorI  ) {
         this.gestorP = gestorP;
         this.gestorI = gestorI;
         this.cliente = cliente;
